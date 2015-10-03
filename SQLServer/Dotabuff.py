@@ -7,9 +7,10 @@ import time
 import json
 import urllib.request
 import sys
+from pip._vendor import requests
 
 key = 'DFD1061664AEAC307766E3BD4C824B83'
-maxAttempts = 100
+maxAttempts = 10
 
 
 # Writes error message to log file
@@ -31,6 +32,74 @@ def realMatches(matches):
     for mm in matches:
         if mm['lobby_type'] == 0:
             yield mm['match_id']
+
+def parseMatch(matchDict):
+    details = {}
+    try:
+        if (matchDict['human_players'] == 10) & (matchDict['game_mode'] in [1,2,3,4,5,16,22]) & (matchDict['lobby_type'] == 0):  # Only care about these modes and full 10 player games
+            details['MatchID'] = matchDict['match_id']
+            details['MatchSeq'] = matchDict['match_seq_num']
+            details['Mode'] = matchDict['game_mode']
+            if matchDict['radiant_win']:
+                details['RadWin'] = 1
+            else:
+                details['RadWin'] = 0
+            teamName = ['Rad','Dir']
+            teamOffset = [0,128]
+            okFlag = True   # Flag if player slot #s match correct value
+            for ind in range(10):
+                if matchDict['players'][ind]['player_slot'] == teamOffset[int(ind/5)]+ind%5:
+                    details[teamName[int(ind/5)] + 'Hero' + str(ind%5+1)] = matchDict['players'][ind]['hero_id']
+                else:
+                    okFlag = False
+                    logError('Error in parseMatch(' + str(matchDict['match_id']) + '): ' + 'player mismatch for\n')
+            if okFlag:
+                return details
+    except KeyError:
+        return {}
+    return {}
+
+# Gets a Batch of Match Details using GetMAtchHistoryBySequenceNum
+def batchDetails(prop, lastRequest):
+    global key
+    global maxAttempts
+    
+    throttle(lastRequest,1)
+    apiURL = historyBySeqNumAPI(prop)
+    print(apiURL)
+    for count in range(maxAttempts):
+        try:
+            page = urllib.request.urlopen(apiURL)
+            content = page.read().decode('utf-8')
+            thisRequest = time.time()
+            break
+        except:
+            error = sys.exc_info()
+            error_msg = 'Error in batchDetails(): ' + str(error[0]) + ',' + str(error[1]) + '\n'
+            logError(error_msg)
+            time.sleep(10)
+    else:
+        logError('Max Attempts reached in getMatches\n')
+        return ({}, thisRequest, 1)
+    
+    parsed_json = json.loads(content)
+    #return (parsed_json,0,0)
+    try:
+        batchData = parsed_json['result']['matches']
+    except KeyError:
+        return({},thisRequest,1)
+    
+    details = []
+    for matchDict in batchData:
+        try:
+            print(matchDict['match_id'])
+            tempInfo = parseMatch(matchDict)
+            if len(tempInfo) > 0:
+                details.append(tempInfo)
+        except KeyError:
+            logError('Error in batchDetails(): ' + 'KeyError for ' + str(matchDict['match_id']) + '\n')
+    return (details,batchData[-1]['match_seq_num'],thisRequest,0)
+    
 
 # Gets Match IDs based on properties listed
 def getMatches(prop, lastRequest):
@@ -59,6 +128,7 @@ def getMatches(prop, lastRequest):
     idGEN = realMatches(parsed_json['result']['matches'])
     return ([x for x in idGEN],time.time(),0)
 
+
 # Gets Match Details for specific Match ID
 def matchDetails(matchID, lastRequest):
     global key
@@ -84,29 +154,10 @@ def matchDetails(matchID, lastRequest):
         return ({}, thisRequest, 1)
     
     parsed_json = json.loads(content)
-    
-    details = {}
-    
-    try:
-        details['MatchID'] = parsed_json['result']['match_id']
-        details['Mode'] = parsed_json['result']['game_mode']
-        if details['Mode'] in [1,2,3,4,5,16,22]:
-            if parsed_json['result']['radiant_win']:
-                details['RadWin'] = 1
-            else:
-                details['RadWin'] = 0
-            teamName = ['Rad','Dir']
-            teamOffset = [0,128]
-            for ind in range(10):
-                if parsed_json['result']['players'][ind]['player_slot'] == teamOffset[int(ind/5)]+ind%5:
-                    details[teamName[int(ind/5)] + 'Hero' + str(ind%5+1)] = parsed_json['result']['players'][ind]['hero_id']
-                else:
-                    logError('Error in matchDetails(' + str(matchID) + '): ' + 'player mismatch\n')
-                    return ({},thisRequest,2)
-        else:
-            return ({},thisRequest,2)
+    details = parseMatch(parsed_json['result'])
+    if len(details) > 0:
         return (details,thisRequest,0)
-    except KeyError:
+    else:
         return ({},thisRequest,2)
     
 # Formats URL for Match History lookup using dota web API
@@ -114,6 +165,27 @@ def historyAPI(prop):
     global key
     
     url = 'https://api.steampowered.com/IDOTA2Match_570/GetMatchHistory/V001/?'
+    
+    first = 1   # Flag used to check if this is first parameter set
+                # For all parameters after first, precede with '&'
+                
+    for item in iter(prop):    # Adds each property onto URL
+        if first == 1:
+            first = 0
+        else:
+            url +='&'
+        url += item + '=' + str(prop[item])
+    if first ==0:
+        url += '&'
+    url += 'key=' + key     # Adds key onto URL
+    
+    return url
+
+# Formats URL for Match History lookup using dota web API
+def historyBySeqNumAPI(prop):
+    global key
+    
+    url = 'https://api.steampowered.com/IDOTA2Match_570/GetMatchHistoryBySequenceNum/V001/?'
     
     first = 1   # Flag used to check if this is first parameter set
                 # For all parameters after first, precede with '&'

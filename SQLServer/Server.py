@@ -55,8 +55,47 @@ def addMatchEntry(cursor,details):
         print(command)
         return 0
     
-   
-def addBatches(conn,prop,n):
+def addBatchesBySeq(conn,prop,n):
+    batchSize = 500
+    keyList = ['MatchID','MatchSeq','Mode','RadWin','RadHero1','RadHero2','RadHero3','RadHero4','RadHero5','DirHero1','DirHero2','DirHero3','DirHero4','DirHero5']
+    keyStr = ','.join(keyList)
+    valStr = (len(keyList)-1)*'?,' + '?'
+    command = 'INSERT INTO Matches (' + keyStr + ''')
+    VALUES (''' + valStr + ')'
+    lastRequest = 0
+    cursor = conn.cursor()
+    
+    (matchIDs,lastRequest,e) = Dotabuff.getMatches(prop,lastRequest)
+    if e != 0:
+        return (0,-1)
+    print(matchIDs[0])
+    (details,lastRequest,e) = Dotabuff.matchDetails(matchIDs[0],lastRequest)
+    if e != 0:
+        return (0,-2) 
+    lastMatchSeq = details['MatchSeq']
+    prop['matches_requested'] = batchSize
+    for ind in range(n):
+        prop['start_at_match_seq_num'] = lastMatchSeq
+        (batchInfo,lastMatchSeq,lastRequest,e) = Dotabuff.batchDetails(prop,lastRequest)
+        print(len(batchInfo))
+        batch_list = []
+        for match in batchInfo:
+            cursor.execute('SELECT * FROM Matches WHERE MatchID=' + str(match['MatchID']))
+            if len(cursor.fetchall())==0:
+                batch_list.append([match[key] for key in keyList])
+        if len(batch_list) > 0:
+            print(command)
+            print(batch_list)
+            cursor.executemany(command,batch_list)
+            #conn.commit()
+    return lastMatchSeq        
+    
+def addBatchesByID(conn,prop,n):
+    keyList = ['MatchID','MatchSeq','Mode','RadWin','RadHero1','RadHero2','RadHero3','RadHero4','RadHero5','DirHero1','DirHero2','DirHero3','DirHero4','DirHero5']
+    keyStr = ','.join(keyList)
+    valStr = (len(keyList)-1)*'?,'+'?'
+    command = 'INSERT INTO Matches (' + keyStr + ''')
+    VALUES (''' + valStr + ')'
     batchSize = 100
     
     lastRequest = 0
@@ -90,11 +129,47 @@ def addBatches(conn,prop,n):
             break
     Dotabuff.logError('Exiting Batch Run, Last Match:' + lastMatch)
 
-def addMatches(conn,startID,n):
+def updateEntries(conn):
+    batchSize = 100
+    keyList = ['MatchID','MatchSeq','Mode','RadWin','RadHero1','RadHero2','RadHero3','RadHero4','RadHero5','DirHero1','DirHero2','DirHero3','DirHero4','DirHero5']
     lastRequest = 0
-    command = ('''INSERT INTO Matches (MatchID,Mode,RadWin,RadHero1,RadHero2,RadHero3,RadHero4,RadHero5,DirHero1,DirHero2,DirHero3,DirHero4,DirHero5)
-    VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)''')
-    keyList = ['MatchID','Mode','RadWin','RadHero1','RadHero2','RadHero3','RadHero4','RadHero5','DirHero1','DirHero2','DirHero3','DirHero4','DirHero5']
+    cursor = conn.cursor()
+    
+    command = '''UPDATE Matches
+    SET '''
+    command += '=?,'.join(keyList[1:len(keyList)]) + '''=?
+    WHERE MatchID=?'''
+    print (command)
+    
+    
+    cursor.execute('SELECT MatchID FROM Matches')
+    idList = [x[0] for x in cursor.fetchall()]
+    
+    batchN = int(len(idList)/batchSize)
+    for ind in range(batchN):
+        print(str(ind) + ' out of ' + str(batchN))
+        batch_list = []
+        for match in idList[(ind*batchSize):((ind+1)*batchSize)]:
+            (details,lastRequest,e) = Dotabuff.matchDetails(match,lastRequest)
+            if e == 0:
+                batch_list.append([details[key] for key in (keyList[1:len(keyList)]+[keyList[0]])])
+        if len(batch_list)>0:
+            conn.cursor().executemany(command,batch_list)
+            conn.commit()
+    for match in idList[(batchN*batchSize):len(idList)]:
+        (details,lastRequest,e) = Dotabuff.matchDetails(match,lastRequest)
+        if e == 0:
+            batch_list.append([details[key] for key in (keyList[1:len(keyList)]+[keyList[0]])])
+    if len(batch_list)>0:
+        conn.cursor().executemany(command,batch_list)
+        conn.commit()        
+
+def addMatches(conn,startID,n):
+    keyList = ['MatchID','MatchSeq','Mode','RadWin','RadHero1','RadHero2','RadHero3','RadHero4','RadHero5','DirHero1','DirHero2','DirHero3','DirHero4','DirHero5']
+    lastRequest = 0
+    command = ('''INSERT INTO Matches (MatchID,MatchSeq,Mode,RadWin,RadHero1,RadHero2,RadHero3,RadHero4,RadHero5,DirHero1,DirHero2,DirHero3,DirHero4,DirHero5)
+    VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)''')
+    cursor = conn.cursor()
     batch_list = []
     for ind in range(n):
         matchID = startID-ind
@@ -112,18 +187,8 @@ def addMatches(conn,startID,n):
     
 def connectSQL():
     conn = pypyodbc.connect('DRIVER={SQL Server};SERVER=PHOENIX\DOTASQLSERVER;DATABASE=Dota;Trusted_Connection=Yes;')
+    conn.cursor().execute('USE Dota')
     return conn
 
 if __name__ == '__main__':
-    conn = connectSQL()
-    cursor = conn.cursor()
-    createTable(cursor)
-    conn.commit()
-    #prop = {'matches_request':1}
-    #(matchHist,lastRequest,e) = Dotabuff.getMatches(prop,0)
-    for i in range(2000):
-        print(i)
-        addMatches(conn,1838331531-i*50,50)
-    conn.close()
-    print('done')
     pass

@@ -944,3 +944,24 @@ Error in matchDetails(1838307565): player mismatch
 Error in matchDetails(1838307343): player mismatch
 Error in matchDetails(1838307324): player mismatch
 Error in matchDetails(1838307250): player mismatch
+Error in batchDetails(): <class 'urllib.error.HTTPError'>,HTTP Error 404: Not Found
+Error in batchDetails(): <class 'urllib.error.HTTPError'>,HTTP Error 404: Not Found
+Error in batchDetails(): <class 'urllib.error.HTTPError'>,HTTP Error 404: Not Found
+Error in batchDetails(): <class 'urllib.error.HTTPError'>,HTTP Error 404: Not Found
+Error in batchDetails(): <class 'urllib.error.HTTPError'>,HTTP Error 404: Not Found
+Error in batchDetails(): <class 'urllib.error.HTTPError'>,HTTP Error 404: Not Found
+Error in batchDetails(): <class 'urllib.error.HTTPError'>,HTTP Error 404: Not Found
+Error in batchDetails(): <class 'urllib.error.HTTPError'>,HTTP Error 404: Not Found
+Error in parseMatch(1840219302): player mismatch for
+Error in matchDetails(1837689498): <class 'KeyboardInterrupt'>,
+Error in matchDetails(1836238174): <class 'urllib.error.HTTPError'>,HTTP Error 503: Service Unavailable
+Error in matchDetails(1836238174): <class 'urllib.error.HTTPError'>,HTTP Error 503: Service Unavailable
+Error in matchDetails(1836238174): <class 'urllib.error.HTTPError'>,HTTP Error 503: Service Unavailable
+Error in matchDetails(1836238174): <class 'urllib.error.HTTPError'>,HTTP Error 503: Service Unavailable
+Error in matchDetails(1836238174): <class 'urllib.error.HTTPError'>,HTTP Error 503: Service Unavailable
+Error in matchDetails(1836238174): <class 'urllib.error.HTTPError'>,HTTP Error 503: Service Unavailable
+Error in matchDetails(1836238174): <class 'urllib.error.HTTPError'>,HTTP Error 503: Service Unavailable
+Error in matchDetails(1836238174): <class 'urllib.error.HTTPError'>,HTTP Error 503: Service Unavailable
+Error in matchDetails(1836238174): <class 'urllib.error.HTTPError'>,HTTP Error 503: Service Unavailable
+Error in matchDetails(1836238174): <class 'urllib.error.HTTPError'>,HTTP Error 503: Service Unavailable
+Max Attempts reached in matchDetails(1836238174)
