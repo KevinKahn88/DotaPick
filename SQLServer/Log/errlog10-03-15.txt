@@ -965,3 +965,31 @@ Error in matchDetails(1836238174): <class 'urllib.error.HTTPError'>,HTTP Error 5
 Error in matchDetails(1836238174): <class 'urllib.error.HTTPError'>,HTTP Error 503: Service Unavailable
 Error in matchDetails(1836238174): <class 'urllib.error.HTTPError'>,HTTP Error 503: Service Unavailable
 Max Attempts reached in matchDetails(1836238174)
+Error in batchDetails(): <class 'urllib.error.HTTPError'>,HTTP Error 500: Internal Server Error
+Error in batchDetails(): <class 'urllib.error.HTTPError'>,HTTP Error 500: Internal Server Error
+Error in batchDetails(): <class 'urllib.error.HTTPError'>,HTTP Error 500: Internal Server Error
+Error in batchDetails(): <class 'urllib.error.HTTPError'>,HTTP Error 500: Internal Server Error
+Error in batchDetails(): <class 'urllib.error.HTTPError'>,HTTP Error 500: Internal Server Error
+Error in batchDetails(): <class 'urllib.error.HTTPError'>,HTTP Error 500: Internal Server Error
+Error in batchDetails(): <class 'urllib.error.HTTPError'>,HTTP Error 500: Internal Server Error
+Error in batchDetails(): <class 'urllib.error.HTTPError'>,HTTP Error 500: Internal Server Error
+Error in batchDetails(): <class 'urllib.error.HTTPError'>,HTTP Error 500: Internal Server Error
+Error in batchDetails(): <class 'urllib.error.HTTPError'>,HTTP Error 500: Internal Server Error
+Error in batchDetails(): <class 'urllib.error.HTTPError'>,HTTP Error 500: Internal Server Error
+Error in batchDetails(): <class 'urllib.error.HTTPError'>,HTTP Error 500: Internal Server Error
+Error in batchDetails(): <class 'urllib.error.HTTPError'>,HTTP Error 500: Internal Server Error
+Error in batchDetails(): <class 'urllib.error.HTTPError'>,HTTP Error 500: Internal Server Error
+Error in batchDetails(): <class 'urllib.error.HTTPError'>,HTTP Error 500: Internal Server Error
+Error in batchDetails(): <class 'urllib.error.HTTPError'>,HTTP Error 500: Internal Server Error
+Error in batchDetails(): <class 'urllib.error.HTTPError'>,HTTP Error 500: Internal Server Error
+Error in batchDetails(): <class 'urllib.error.HTTPError'>,HTTP Error 500: Internal Server Error
+Error in batchDetails(): <class 'urllib.error.HTTPError'>,HTTP Error 500: Internal Server Error
+Error in batchDetails(): <class 'urllib.error.HTTPError'>,HTTP Error 500: Internal Server Error
+Error in batchDetails(): <class 'urllib.error.HTTPError'>,HTTP Error 500: Internal Server Error
+Error in batchDetails(): <class 'urllib.error.HTTPError'>,HTTP Error 500: Internal Server Error
+Error in batchDetails(): <class 'urllib.error.HTTPError'>,HTTP Error 500: Internal Server Error
+Error in batchDetails(): <class 'urllib.error.HTTPError'>,HTTP Error 500: Internal Server Error
+Error in batchDetails(): <class 'urllib.error.HTTPError'>,HTTP Error 500: Internal Server Error
+Error in batchDetails(): <class 'urllib.error.HTTPError'>,HTTP Error 500: Internal Server Error
+Error in batchDetails(): <class 'urllib.error.HTTPError'>,HTTP Error 500: Internal Server Error
+Error in batchDetails(): <class 'urllib.error.HTTPError'>,HTTP Error 500: Internal Server Error

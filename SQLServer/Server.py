@@ -5,7 +5,7 @@ Created on Sep 16, 2015
 '''
 
 import pypyodbc
-import Dotabuff
+from . import Dotabuff
 
 def createTable(cursor):
     cursor.execute('''
@@ -65,29 +65,36 @@ def addBatchesBySeq(conn,prop,n):
     lastRequest = 0
     cursor = conn.cursor()
     
-    (matchIDs,lastRequest,e) = Dotabuff.getMatches(prop,lastRequest)
-    if e != 0:
-        return (0,-1)
-    print(matchIDs[0])
-    (details,lastRequest,e) = Dotabuff.matchDetails(matchIDs[0],lastRequest)
-    if e != 0:
-        return (0,-2) 
-    lastMatchSeq = details['MatchSeq']
+       
+    try:
+        lastMatchSeq = prop['start_at_match_seq_num']
+    except KeyError:
+        (matchIDs,lastRequest,e) = Dotabuff.getMatches(prop,lastRequest)
+        if e != 0:
+            return (0,-1)
+        print(matchIDs[0])
+        (details,lastRequest,e) = Dotabuff.matchDetails(matchIDs[0],lastRequest)
+        print(matchIDs[0])
+        if e != 0:
+            return (0,-2) 
+        lastMatchSeq = details['MatchSeq']
     prop['matches_requested'] = batchSize
     for ind in range(n):
         prop['start_at_match_seq_num'] = lastMatchSeq
         (batchInfo,lastMatchSeq,lastRequest,e) = Dotabuff.batchDetails(prop,lastRequest)
-        print(len(batchInfo))
-        batch_list = []
-        for match in batchInfo:
-            cursor.execute('SELECT * FROM Matches WHERE MatchID=' + str(match['MatchID']))
-            if len(cursor.fetchall())==0:
-                batch_list.append([match[key] for key in keyList])
-        if len(batch_list) > 0:
-            print(command)
-            print(batch_list)
-            cursor.executemany(command,batch_list)
-            #conn.commit()
+        if e == 0:
+            batch_list = []
+            for match in batchInfo:
+                cursor.execute('SELECT * FROM Matches WHERE MatchID=' + str(match['MatchID']))
+                if len(cursor.fetchall())==0:
+                    batch_list.append([match[key] for key in keyList])
+            if len(batch_list) > 0:
+                cursor.executemany(command,batch_list)
+                conn.commit()
+            print(str(ind) + '-' + str(len(batch_list)) + '-' + str(lastMatchSeq))
+            f = open('LastMatchSeq.txt','w')
+            f.write(str(lastMatchSeq))
+            f.close()
     return lastMatchSeq        
     
 def addBatchesByID(conn,prop,n):
@@ -191,4 +198,6 @@ def connectSQL():
     return conn
 
 if __name__ == '__main__':
+    conn = connectSQL()
+    print(addBatchesBySeq(conn,{'start_at_match_seq_num': 1445992613},50000))
     pass

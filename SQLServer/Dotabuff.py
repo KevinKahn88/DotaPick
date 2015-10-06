@@ -7,7 +7,6 @@ import time
 import json
 import urllib.request
 import sys
-from pip._vendor import requests
 
 key = 'DFD1061664AEAC307766E3BD4C824B83'
 maxAttempts = 10
@@ -47,7 +46,7 @@ def parseMatch(matchDict):
             teamName = ['Rad','Dir']
             teamOffset = [0,128]
             okFlag = True   # Flag if player slot #s match correct value
-            for ind in range(10):
+            for ind in range(10):   # Run through all players
                 if matchDict['players'][ind]['player_slot'] == teamOffset[int(ind/5)]+ind%5:
                     details[teamName[int(ind/5)] + 'Hero' + str(ind%5+1)] = matchDict['players'][ind]['hero_id']
                 else:
@@ -67,7 +66,7 @@ def batchDetails(prop, lastRequest):
     throttle(lastRequest,1)
     apiURL = historyBySeqNumAPI(prop)
     print(apiURL)
-    for count in range(maxAttempts):
+    for count in range(maxAttempts):    # Attempt to grab match info from Web API
         try:
             page = urllib.request.urlopen(apiURL)
             content = page.read().decode('utf-8')
@@ -80,14 +79,13 @@ def batchDetails(prop, lastRequest):
             time.sleep(10)
     else:
         logError('Max Attempts reached in getMatches\n')
-        return ({}, thisRequest, 1)
+        return ({}, time.time(),0,1)
     
-    parsed_json = json.loads(content)
-    #return (parsed_json,0,0)
+    parsed_json = json.loads(content)   # Parse JSON Format
     try:
         batchData = parsed_json['result']['matches']
     except KeyError:
-        return({},thisRequest,1)
+        return({},thisRequest,0,1)
     
     details = []
     for matchDict in batchData:
