@@ -13,26 +13,86 @@ def createTable(cursor):
     IF object_ID('Matches') is null
     create table Matches
     (
-        MatchID int NOT NULL UNIQUE,
-        Mode int,
-        RadWin bit,
-        RadHero1 int,
-        RadHero2 int,
-        RadHero3 int,
-        RadHero4 int,
-        RadHero5 int,
-        DirHero1 int,
-        DirHero2 int,
-        DirHero3 int,
-        DirHero4 int,
-        DirHero5 int,
+        Match_ID int NOT NULL UNIQUE,
+        Match_Seq int NOT NULL UNIQUE,
+        Game_Mode int,
+        Lobby_Type int,
+        Start_Time int,
+        Duration int,
+        Tower_Rad int,
+        Tower_Dir int,
+        Barracks_Rad int,
+        Barracks_Dir int,
+        FB_Time int,
+        Humans int,
+        Leavers int,
+        Rad_Win bit,
+        Rad_Hero1 int,
+        Rad_Hero2 int,
+        Rad_Hero3 int,
+        Rad_Hero4 int,
+        Rad_Hero5 int,
+        Dir_Hero1 int,
+        Dir_Hero2 int,
+        Dir_Hero3 int,
+        Dir_Hero4 int,
+        Dir_Hero5 int,
+        Cluster int
     )
     ''')
     
+# Adds a batch of match details using 'GetMatchHistoryBySequenceNum'
+def addBatchesBySeq(conn,prop,n):
+    batchSize = 500
+    keyList = ['Match_ID','Match_Seq','Game_Mode','Lobby_Type','Start_Time','Duration','Tower_Rad','Tower_Dir','Barracks_Rad','Barracks_Dir','FB_Time','Humans','Leavers','Rad_Win','Rad_Hero1','Rad_Hero2','Rad_Hero3','Rad_Hero4','Rad_Hero5','Dir_Hero1','Dir_Hero2','Dir_Hero3','Dir_Hero4','Dir_Hero5','Cluster']
+    keyStr = ','.join(keyList)
+    valStr = (len(keyList)-1)*'?,' + '?'
+    command = 'INSERT INTO Matches (' + keyStr + ''')
+    VALUES (''' + valStr + ')'
+    lastRequest = 0
+    cursor = conn.cursor()
+    
+    try:
+        lastMatchSeq = prop['start_at_match_seq_num']
+    except KeyError:
+        (matchIDs,lastRequest,e) = Dotabuff.getMatches(prop,lastRequest)
+        if e != 0:
+            return (0,-1)
+        (details,lastRequest,e) = Dotabuff.matchDetails(matchIDs[0],lastRequest)
+        if e != 0:
+            print(e)
+            return (0,-2) 
+        lastMatchSeq = details['Match_Seq']
+    prop['matches_requested'] = batchSize
+    for ind in range(n):
+        prop['start_at_match_seq_num'] = lastMatchSeq
+        (batchInfo,lastMatchSeq,lastRequest,e) = Dotabuff.batchDetails(prop,lastRequest)
+        if e == 0:
+            batch_list = []
+            for match in batchInfo:
+                cursor.execute('SELECT * FROM Matches WHERE Match_ID=' + str(match['Match_ID']))
+                if len(cursor.fetchall())==0:
+                    batch_entry = ['']*len(keyList)
+                    for keyInd in range(len(keyList)):
+                        try:
+                            batch_entry[keyInd] = match[keyList[keyInd]]
+                        except KeyError:
+                            batch_entry[keyInd] = None
+                    batch_list.append(batch_entry)
+            if len(batch_list) > 0:
+                cursor.executemany(command,batch_list)
+                conn.commit()
+            print(str(ind) + '-' + str(len(batch_list)) + '-' + str(lastMatchSeq))
+            f = open('LastMatchSeq.txt','w')
+            f.write(str(lastMatchSeq))
+            f.close()
+    return lastMatchSeq 
+
+
 def addMatchEntry(cursor,details):
     
     cursor.execute('USE Dota')
-    cursor.execute('SELECT * FROM Matches WHERE MatchID=' + str(details['MatchID']))
+    cursor.execute('SELECT * FROM Matches WHERE MatchID=' + str(details['Match_ID']))
     if len(cursor.fetchall())>0: #Check if MatchID entry exists already
         return 1
     else:   #If new, enter Match Details
@@ -55,47 +115,7 @@ def addMatchEntry(cursor,details):
         print(command)
         return 0
     
-def addBatchesBySeq(conn,prop,n):
-    batchSize = 500
-    keyList = ['MatchID','MatchSeq','Mode','RadWin','RadHero1','RadHero2','RadHero3','RadHero4','RadHero5','DirHero1','DirHero2','DirHero3','DirHero4','DirHero5']
-    keyStr = ','.join(keyList)
-    valStr = (len(keyList)-1)*'?,' + '?'
-    command = 'INSERT INTO Matches (' + keyStr + ''')
-    VALUES (''' + valStr + ')'
-    lastRequest = 0
-    cursor = conn.cursor()
-    
        
-    try:
-        lastMatchSeq = prop['start_at_match_seq_num']
-    except KeyError:
-        (matchIDs,lastRequest,e) = Dotabuff.getMatches(prop,lastRequest)
-        if e != 0:
-            return (0,-1)
-        print(matchIDs[0])
-        (details,lastRequest,e) = Dotabuff.matchDetails(matchIDs[0],lastRequest)
-        print(matchIDs[0])
-        if e != 0:
-            return (0,-2) 
-        lastMatchSeq = details['MatchSeq']
-    prop['matches_requested'] = batchSize
-    for ind in range(n):
-        prop['start_at_match_seq_num'] = lastMatchSeq
-        (batchInfo,lastMatchSeq,lastRequest,e) = Dotabuff.batchDetails(prop,lastRequest)
-        if e == 0:
-            batch_list = []
-            for match in batchInfo:
-                cursor.execute('SELECT * FROM Matches WHERE MatchID=' + str(match['MatchID']))
-                if len(cursor.fetchall())==0:
-                    batch_list.append([match[key] for key in keyList])
-            if len(batch_list) > 0:
-                cursor.executemany(command,batch_list)
-                conn.commit()
-            print(str(ind) + '-' + str(len(batch_list)) + '-' + str(lastMatchSeq))
-            f = open('LastMatchSeq.txt','w')
-            f.write(str(lastMatchSeq))
-            f.close()
-    return lastMatchSeq        
     
 def addBatchesByID(conn,prop,n):
     keyList = ['MatchID','MatchSeq','Mode','RadWin','RadHero1','RadHero2','RadHero3','RadHero4','RadHero5','DirHero1','DirHero2','DirHero3','DirHero4','DirHero5']
@@ -138,7 +158,7 @@ def addBatchesByID(conn,prop,n):
 
 def updateEntries(conn):
     batchSize = 100
-    keyList = ['MatchID','MatchSeq','Mode','RadWin','RadHero1','RadHero2','RadHero3','RadHero4','RadHero5','DirHero1','DirHero2','DirHero3','DirHero4','DirHero5']
+    keyList = keyList = ['Match_ID','Match_Seq','Game_Mode','Lobby_Type','Start_Time','Duration','Tower_Rad','Tower_Dir','Barracks_Rad','Barracks_Dir','FB_Time','Humans','Leavers','Rad_Win','Rad_Hero1','Rad_Hero2','Rad_Hero3','Rad_Hero4','Rad_Hero5','Dir_Hero1','Dir_Hero2','Dir_Hero3','Dir_Hero4','Dir_Hero5']
     lastRequest = 0
     cursor = conn.cursor()
     
@@ -199,5 +219,7 @@ def connectSQL():
 
 if __name__ == '__main__':
     conn = connectSQL()
-    print(addBatchesBySeq(conn,{'start_at_match_seq_num': 1445992613},50000))
+    createTable(conn.cursor())
+    #
+    print(addBatchesBySeq(conn,{'start_at_match_seq_num': 1687412213},50000))
     pass

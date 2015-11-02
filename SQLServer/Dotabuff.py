@@ -35,25 +35,36 @@ def realMatches(matches):
 def parseMatch(matchDict):
     details = {}
     try:
-        if (matchDict['human_players'] == 10) & (matchDict['game_mode'] in [1,2,3,4,5,16,22]) & (matchDict['lobby_type'] == 0):  # Only care about these modes and full 10 player games
-            details['MatchID'] = matchDict['match_id']
-            details['MatchSeq'] = matchDict['match_seq_num']
-            details['Mode'] = matchDict['game_mode']
-            if matchDict['radiant_win']:
-                details['RadWin'] = 1
-            else:
-                details['RadWin'] = 0
-            teamName = ['Rad','Dir']
-            teamOffset = [0,128]
-            okFlag = True   # Flag if player slot #s match correct value
-            for ind in range(10):   # Run through all players
-                if matchDict['players'][ind]['player_slot'] == teamOffset[int(ind/5)]+ind%5:
-                    details[teamName[int(ind/5)] + 'Hero' + str(ind%5+1)] = matchDict['players'][ind]['hero_id']
-                else:
-                    okFlag = False
-                    logError('Error in parseMatch(' + str(matchDict['match_id']) + '): ' + 'player mismatch for\n')
-            if okFlag:
-                return details
+        details['Match_ID'] = matchDict['match_id']
+        details['Match_Seq'] = matchDict['match_seq_num']
+        details['Game_Mode'] = matchDict['game_mode']
+        details['Lobby_Type'] = matchDict['lobby_type']
+        details['Start_Time'] = matchDict['start_time']
+        details['Duration'] = matchDict['duration']
+        details['Tower_Rad'] = matchDict['tower_status_radiant']
+        details['Tower_Dir'] = matchDict['tower_status_dire']
+        details['Barracks_Rad'] = matchDict['barracks_status_radiant']
+        details['Barracks_Dir'] = matchDict['barracks_status_dire']
+        details['FB_Time'] = matchDict['first_blood_time']
+        details['Humans'] = matchDict['human_players']
+        details['Cluster'] = matchDict['cluster']
+        if matchDict['radiant_win']:
+            details['Rad_Win'] = 1
+        else:
+            details['Rad_Win'] = 0
+        teamName = ['Rad','Dir']
+        teamOffset = 128
+        leaverCount = 0
+
+
+        for ind in range(len(matchDict['players'])):   # Run through all players
+            playerSlot = matchDict['players'][ind]['player_slot']
+            playerLabel = teamName[int(playerSlot/teamOffset)] + '_Hero' + str(playerSlot%teamOffset+1)  
+            details[playerLabel] = matchDict['players'][ind]['hero_id']
+            if matchDict['players'][ind]['leaver_status'] > 2:
+                leaverCount += 1 
+        details['Leavers'] = leaverCount
+        return details
     except KeyError:
         return {}
     return {}
@@ -65,7 +76,6 @@ def batchDetails(prop, lastRequest):
     
     throttle(lastRequest,1)
     apiURL = historyBySeqNumAPI(prop)
-    print(apiURL)
     for count in range(maxAttempts):    # Attempt to grab match info from Web API
         try:
             page = urllib.request.urlopen(apiURL)
@@ -90,7 +100,6 @@ def batchDetails(prop, lastRequest):
     details = []
     for matchDict in batchData:
         try:
-            print(matchDict['match_id'])
             tempInfo = parseMatch(matchDict)
             if len(tempInfo) > 0:
                 details.append(tempInfo)
@@ -135,7 +144,7 @@ def matchDetails(matchID, lastRequest):
     throttle(lastRequest,1)
     url = 'https://api.steampowered.com/IDOTA2Match_570/GetMatchDetails/V001/?match_id=' + str(matchID) + '&key=' + key
     thisRequest = time.time()
-    #print(url)
+    print(url)
     for count in range(maxAttempts):
         try:
             page = urllib.request.urlopen(url)
@@ -152,6 +161,7 @@ def matchDetails(matchID, lastRequest):
         return ({}, thisRequest, 1)
     
     parsed_json = json.loads(content)
+    print(parsed_json)
     details = parseMatch(parsed_json['result'])
     if len(details) > 0:
         return (details,thisRequest,0)
@@ -201,5 +211,6 @@ def historyBySeqNumAPI(prop):
     return url
     
 if __name__ == '__main__':
-    
+    url = 'https://api.steampowered.com/IDOTA2Match_570/GetMatchDetails/V001/?match_id=1892354235&key=DFD1061664AEAC307766E3BD4C824B83'
+    print(matchDetails(1892354235,0))
     pass

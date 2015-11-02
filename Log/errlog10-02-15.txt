@@ -1,0 +1,220 @@
+Error in matchDetails(1837606799): <class 'urllib.error.URLError'>,<urlopen error [WinError 10060] A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond>
+Error in matchDetails(1837597543): <class 'http.client.BadStatusLine'>,''
+Error in matchDetails(1837593439): <class 'urllib.error.URLError'>,<urlopen error EOF occurred in violation of protocol (_ssl.c:600)>
+Error in getMatches): <class 'http.client.BadStatusLine'>,''
+Error in getMatches): <class 'urllib.error.URLError'>,<urlopen error EOF occurred in violation of protocol (_ssl.c:600)>
+Error in matchDetails(1837684493): player mismatch
+Error in getMatches): <class 'urllib.error.URLError'>,<urlopen error EOF occurred in violation of protocol (_ssl.c:600)>
+Error in getMatches): <class 'urllib.error.URLError'>,<urlopen error [WinError 10060] A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond>
+Error in getMatches): <class 'urllib.error.URLError'>,<urlopen error [WinError 10060] A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond>
+Error in getMatches): <class 'urllib.error.URLError'>,<urlopen error EOF occurred in violation of protocol (_ssl.c:600)>
+Error in getMatches): <class 'urllib.error.URLError'>,<urlopen error [WinError 10060] A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond>
+Error in getMatches): <class 'urllib.error.URLError'>,<urlopen error [WinError 10060] A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond>
+Error in matchDetails(1838333181): <class 'urllib.error.HTTPError'>,HTTP Error 500: Internal Server Error
+Error in matchDetails(1838333181): <class 'urllib.error.HTTPError'>,HTTP Error 500: Internal Server Error
+Error in matchDetails(1838333181): <class 'urllib.error.HTTPError'>,HTTP Error 500: Internal Server Error
+Error in matchDetails(1838333181): <class 'urllib.error.HTTPError'>,HTTP Error 500: Internal Server Error
+Error in matchDetails(1838333181): <class 'urllib.error.HTTPError'>,HTTP Error 500: Internal Server Error
+Error in matchDetails(1838333181): <class 'urllib.error.HTTPError'>,HTTP Error 500: Internal Server Error
+Error in matchDetails(1838333181): <class 'urllib.error.HTTPError'>,HTTP Error 500: Internal Server Error
+Error in matchDetails(1838333181): <class 'urllib.error.HTTPError'>,HTTP Error 500: Internal Server Error
+Error in matchDetails(1838333181): <class 'urllib.error.HTTPError'>,HTTP Error 500: Internal Server Error
+Error in matchDetails(1838333181): <class 'urllib.error.HTTPError'>,HTTP Error 500: Internal Server Error
+Error in matchDetails(1838333181): <class 'urllib.error.HTTPError'>,HTTP Error 500: Internal Server Error
+Error in matchDetails(1838333181): <class 'urllib.error.HTTPError'>,HTTP Error 500: Internal Server Error
+Error in matchDetails(1838333181): <class 'urllib.error.HTTPError'>,HTTP Error 500: Internal Server Error
+Error in matchDetails(1838333181): <class 'urllib.error.HTTPError'>,HTTP Error 500: Internal Server Error
+Error in matchDetails(1838333181): <class 'urllib.error.HTTPError'>,HTTP Error 500: Internal Server Error
+Error in matchDetails(1838333181): <class 'urllib.error.HTTPError'>,HTTP Error 500: Internal Server Error
+Error in matchDetails(1838333181): <class 'urllib.error.HTTPError'>,HTTP Error 500: Internal Server Error
+Error in matchDetails(1838333181): <class 'urllib.error.HTTPError'>,HTTP Error 500: Internal Server Error
+Error in matchDetails(1838333181): <class 'urllib.error.HTTPError'>,HTTP Error 500: Internal Server Error
+Error in matchDetails(1838333181): <class 'urllib.error.HTTPError'>,HTTP Error 503: Service Unavailable
+Error in matchDetails(1838333181): <class 'urllib.error.HTTPError'>,HTTP Error 503: Service Unavailable
+Error in matchDetails(1838333181): <class 'urllib.error.HTTPError'>,HTTP Error 503: Service Unavailable
+Error in matchDetails(1838333181): <class 'urllib.error.HTTPError'>,HTTP Error 503: Service Unavailable
+Error in matchDetails(1838333181): <class 'urllib.error.HTTPError'>,HTTP Error 503: Service Unavailable
+Error in matchDetails(1838333181): <class 'urllib.error.HTTPError'>,HTTP Error 503: Service Unavailable
+Error in matchDetails(1838333181): <class 'urllib.error.HTTPError'>,HTTP Error 503: Service Unavailable
+Error in matchDetails(1838333181): <class 'urllib.error.HTTPError'>,HTTP Error 503: Service Unavailable
+Error in matchDetails(1838333181): <class 'urllib.error.HTTPError'>,HTTP Error 503: Service Unavailable
+Error in matchDetails(1838333181): <class 'urllib.error.HTTPError'>,HTTP Error 503: Service Unavailable
+Error in matchDetails(1838333181): <class 'urllib.error.HTTPError'>,HTTP Error 503: Service Unavailable
+Error in matchDetails(1838333181): <class 'urllib.error.HTTPError'>,HTTP Error 503: Service Unavailable
+Error in matchDetails(1838333181): <class 'urllib.error.HTTPError'>,HTTP Error 503: Service Unavailable
+Error in matchDetails(1838333181): <class 'urllib.error.HTTPError'>,HTTP Error 503: Service Unavailable
+Error in matchDetails(1838333181): <class 'urllib.error.HTTPError'>,HTTP Error 503: Service Unavailable
+Error in matchDetails(1838333181): <class 'urllib.error.HTTPError'>,HTTP Error 503: Service Unavailable
+Error in matchDetails(1838333181): <class 'urllib.error.HTTPError'>,HTTP Error 503: Service Unavailable
+Error in matchDetails(1838333181): <class 'urllib.error.HTTPError'>,HTTP Error 503: Service Unavailable
+Error in matchDetails(1838333181): <class 'urllib.error.HTTPError'>,HTTP Error 503: Service Unavailable
+Error in matchDetails(1838333181): <class 'urllib.error.HTTPError'>,HTTP Error 503: Service Unavailable
+Error in matchDetails(1838333181): <class 'urllib.error.HTTPError'>,HTTP Error 503: Service Unavailable
+Error in matchDetails(1838333181): <class 'urllib.error.HTTPError'>,HTTP Error 503: Service Unavailable
+Error in matchDetails(1838333181): <class 'urllib.error.HTTPError'>,HTTP Error 503: Service Unavailable
+Error in matchDetails(1838333181): <class 'urllib.error.HTTPError'>,HTTP Error 503: Service Unavailable
+Error in matchDetails(1838333181): <class 'urllib.error.HTTPError'>,HTTP Error 503: Service Unavailable
+Error in matchDetails(1838333181): <class 'urllib.error.HTTPError'>,HTTP Error 503: Service Unavailable
+Error in matchDetails(1838333181): <class 'urllib.error.HTTPError'>,HTTP Error 503: Service Unavailable
+Error in matchDetails(1838333181): <class 'urllib.error.HTTPError'>,HTTP Error 503: Service Unavailable
+Error in matchDetails(1838333181): <class 'urllib.error.HTTPError'>,HTTP Error 503: Service Unavailable
+Error in matchDetails(1838333181): <class 'urllib.error.HTTPError'>,HTTP Error 503: Service Unavailable
+Error in matchDetails(1838333181): <class 'urllib.error.HTTPError'>,HTTP Error 503: Service Unavailable
+Error in matchDetails(1838333181): <class 'urllib.error.HTTPError'>,HTTP Error 503: Service Unavailable
+Error in matchDetails(1838333181): <class 'urllib.error.HTTPError'>,HTTP Error 503: Service Unavailable
+Error in matchDetails(1838333181): <class 'urllib.error.HTTPError'>,HTTP Error 503: Service Unavailable
+Error in matchDetails(1838333181): <class 'urllib.error.HTTPError'>,HTTP Error 503: Service Unavailable
+Error in matchDetails(1838333181): <class 'urllib.error.HTTPError'>,HTTP Error 503: Service Unavailable
+Error in matchDetails(1838333181): <class 'urllib.error.HTTPError'>,HTTP Error 503: Service Unavailable
+Error in matchDetails(1838333181): <class 'urllib.error.HTTPError'>,HTTP Error 503: Service Unavailable
+Error in matchDetails(1838333181): <class 'urllib.error.HTTPError'>,HTTP Error 503: Service Unavailable
+Error in matchDetails(1838333181): <class 'urllib.error.HTTPError'>,HTTP Error 503: Service Unavailable
+Error in matchDetails(1838333181): <class 'urllib.error.HTTPError'>,HTTP Error 503: Service Unavailable
+Error in matchDetails(1838333181): <class 'urllib.error.HTTPError'>,HTTP Error 503: Service Unavailable
+Error in matchDetails(1838333181): <class 'urllib.error.HTTPError'>,HTTP Error 503: Service Unavailable
+Error in matchDetails(1838333181): <class 'urllib.error.HTTPError'>,HTTP Error 503: Service Unavailable
+Error in matchDetails(1838333181): <class 'urllib.error.HTTPError'>,HTTP Error 503: Service Unavailable
+Error in matchDetails(1838333181): <class 'urllib.error.HTTPError'>,HTTP Error 503: Service Unavailable
+Error in matchDetails(1838333181): <class 'urllib.error.HTTPError'>,HTTP Error 503: Service Unavailable
+Error in matchDetails(1838333181): <class 'urllib.error.HTTPError'>,HTTP Error 503: Service Unavailable
+Error in matchDetails(1838333181): <class 'urllib.error.HTTPError'>,HTTP Error 503: Service Unavailable
+Error in matchDetails(1838333181): <class 'urllib.error.HTTPError'>,HTTP Error 503: Service Unavailable
+Error in matchDetails(1838333181): <class 'urllib.error.HTTPError'>,HTTP Error 503: Service Unavailable
+Error in matchDetails(1838333181): <class 'urllib.error.HTTPError'>,HTTP Error 503: Service Unavailable
+Error in matchDetails(1838333181): <class 'urllib.error.HTTPError'>,HTTP Error 503: Service Unavailable
+Error in matchDetails(1838333181): <class 'urllib.error.HTTPError'>,HTTP Error 503: Service Unavailable
+Error in matchDetails(1838333181): <class 'urllib.error.HTTPError'>,HTTP Error 503: Service Unavailable
+Error in matchDetails(1838333181): <class 'urllib.error.HTTPError'>,HTTP Error 503: Service Unavailable
+Error in matchDetails(1838333181): <class 'urllib.error.HTTPError'>,HTTP Error 503: Service Unavailable
+Error in matchDetails(1838333181): <class 'urllib.error.HTTPError'>,HTTP Error 503: Service Unavailable
+Error in matchDetails(1838333181): <class 'urllib.error.HTTPError'>,HTTP Error 503: Service Unavailable
+Error in matchDetails(1838333181): <class 'urllib.error.HTTPError'>,HTTP Error 503: Service Unavailable
+Error in matchDetails(1838333181): <class 'urllib.error.HTTPError'>,HTTP Error 503: Service Unavailable
+Error in matchDetails(1838333181): <class 'urllib.error.HTTPError'>,HTTP Error 503: Service Unavailable
+Error in matchDetails(1838333181): <class 'urllib.error.HTTPError'>,HTTP Error 503: Service Unavailable
+Error in matchDetails(1838333181): <class 'urllib.error.HTTPError'>,HTTP Error 503: Service Unavailable
+Error in matchDetails(1838333181): <class 'urllib.error.HTTPError'>,HTTP Error 503: Service Unavailable
+Error in matchDetails(1838333181): <class 'urllib.error.HTTPError'>,HTTP Error 503: Service Unavailable
+Error in matchDetails(1838333181): <class 'urllib.error.HTTPError'>,HTTP Error 503: Service Unavailable
+Error in matchDetails(1838333181): <class 'urllib.error.HTTPError'>,HTTP Error 503: Service Unavailable
+Error in matchDetails(1838333181): <class 'urllib.error.HTTPError'>,HTTP Error 503: Service Unavailable
+Error in matchDetails(1838333181): <class 'urllib.error.HTTPError'>,HTTP Error 503: Service Unavailable
+Error in matchDetails(1838333181): <class 'urllib.error.HTTPError'>,HTTP Error 503: Service Unavailable
+Error in matchDetails(1838333181): <class 'urllib.error.HTTPError'>,HTTP Error 503: Service Unavailable
+Error in matchDetails(1838333181): <class 'urllib.error.HTTPError'>,HTTP Error 503: Service Unavailable
+Error in matchDetails(1838333181): <class 'urllib.error.HTTPError'>,HTTP Error 503: Service Unavailable
+Error in matchDetails(1838333181): <class 'urllib.error.HTTPError'>,HTTP Error 503: Service Unavailable
+Error in matchDetails(1838333181): <class 'urllib.error.HTTPError'>,HTTP Error 503: Service Unavailable
+Error in matchDetails(1838333181): <class 'urllib.error.HTTPError'>,HTTP Error 503: Service Unavailable
+Error in matchDetails(1838333181): <class 'urllib.error.HTTPError'>,HTTP Error 503: Service Unavailable
+Error in matchDetails(1838333181): <class 'urllib.error.HTTPError'>,HTTP Error 503: Service Unavailable
+Error in matchDetails(1838333181): <class 'urllib.error.HTTPError'>,HTTP Error 503: Service Unavailable
+Error in matchDetails(1838333181): <class 'urllib.error.HTTPError'>,HTTP Error 503: Service Unavailable
+Max Attempts reached in matchDetails(1838333181)
+Error in matchDetails(1838332387): player mismatch
+Error in matchDetails(1838332135): <class 'urllib.error.HTTPError'>,HTTP Error 500: Internal Server Error
+Error in matchDetails(1838332135): <class 'urllib.error.HTTPError'>,HTTP Error 500: Internal Server Error
+Error in matchDetails(1838332135): <class 'urllib.error.HTTPError'>,HTTP Error 500: Internal Server Error
+Error in matchDetails(1838332135): <class 'urllib.error.HTTPError'>,HTTP Error 500: Internal Server Error
+Error in matchDetails(1838332135): <class 'urllib.error.HTTPError'>,HTTP Error 500: Internal Server Error
+Error in matchDetails(1838332135): <class 'urllib.error.HTTPError'>,HTTP Error 500: Internal Server Error
+Error in matchDetails(1838332135): <class 'urllib.error.HTTPError'>,HTTP Error 500: Internal Server Error
+Error in matchDetails(1838332135): <class 'urllib.error.HTTPError'>,HTTP Error 500: Internal Server Error
+Error in matchDetails(1838332135): <class 'urllib.error.HTTPError'>,HTTP Error 500: Internal Server Error
+Error in matchDetails(1838332135): <class 'urllib.error.HTTPError'>,HTTP Error 500: Internal Server Error
+Error in matchDetails(1838332135): <class 'urllib.error.HTTPError'>,HTTP Error 500: Internal Server Error
+Error in matchDetails(1838332135): <class 'urllib.error.HTTPError'>,HTTP Error 500: Internal Server Error
+Error in matchDetails(1838332135): <class 'urllib.error.HTTPError'>,HTTP Error 500: Internal Server Error
+Error in matchDetails(1838332135): <class 'urllib.error.HTTPError'>,HTTP Error 500: Internal Server Error
+Error in matchDetails(1838332135): <class 'urllib.error.HTTPError'>,HTTP Error 500: Internal Server Error
+Error in matchDetails(1838332135): <class 'urllib.error.HTTPError'>,HTTP Error 500: Internal Server Error
+Error in matchDetails(1838332135): <class 'urllib.error.HTTPError'>,HTTP Error 500: Internal Server Error
+Error in matchDetails(1838332135): <class 'urllib.error.HTTPError'>,HTTP Error 500: Internal Server Error
+Error in matchDetails(1838332135): <class 'urllib.error.HTTPError'>,HTTP Error 503: Service Unavailable
+Error in matchDetails(1838332135): <class 'urllib.error.HTTPError'>,HTTP Error 503: Service Unavailable
+Error in matchDetails(1838332135): <class 'urllib.error.HTTPError'>,HTTP Error 503: Service Unavailable
+Error in matchDetails(1838332135): <class 'urllib.error.HTTPError'>,HTTP Error 503: Service Unavailable
+Error in matchDetails(1838332135): <class 'urllib.error.HTTPError'>,HTTP Error 503: Service Unavailable
+Error in matchDetails(1838332135): <class 'urllib.error.HTTPError'>,HTTP Error 503: Service Unavailable
+Error in matchDetails(1838332135): <class 'urllib.error.HTTPError'>,HTTP Error 503: Service Unavailable
+Error in matchDetails(1838332135): <class 'urllib.error.HTTPError'>,HTTP Error 503: Service Unavailable
+Error in matchDetails(1838332135): <class 'urllib.error.HTTPError'>,HTTP Error 503: Service Unavailable
+Error in matchDetails(1838332135): <class 'urllib.error.HTTPError'>,HTTP Error 503: Service Unavailable
+Error in matchDetails(1838332135): <class 'urllib.error.HTTPError'>,HTTP Error 503: Service Unavailable
+Error in matchDetails(1838332135): <class 'urllib.error.HTTPError'>,HTTP Error 503: Service Unavailable
+Error in matchDetails(1838332135): <class 'urllib.error.HTTPError'>,HTTP Error 503: Service Unavailable
+Error in matchDetails(1838332135): <class 'urllib.error.HTTPError'>,HTTP Error 503: Service Unavailable
+Error in matchDetails(1838332135): <class 'urllib.error.HTTPError'>,HTTP Error 503: Service Unavailable
+Error in matchDetails(1838332135): <class 'urllib.error.HTTPError'>,HTTP Error 503: Service Unavailable
+Error in matchDetails(1838332135): <class 'urllib.error.HTTPError'>,HTTP Error 503: Service Unavailable
+Error in matchDetails(1838332135): <class 'urllib.error.HTTPError'>,HTTP Error 503: Service Unavailable
+Error in matchDetails(1838332135): <class 'urllib.error.HTTPError'>,HTTP Error 503: Service Unavailable
+Error in matchDetails(1838332135): <class 'urllib.error.HTTPError'>,HTTP Error 503: Service Unavailable
+Error in matchDetails(1838332135): <class 'urllib.error.HTTPError'>,HTTP Error 503: Service Unavailable
+Error in matchDetails(1838332135): <class 'urllib.error.HTTPError'>,HTTP Error 503: Service Unavailable
+Error in matchDetails(1838332135): <class 'urllib.error.HTTPError'>,HTTP Error 503: Service Unavailable
+Error in matchDetails(1838332135): <class 'urllib.error.HTTPError'>,HTTP Error 503: Service Unavailable
+Error in matchDetails(1838332135): <class 'urllib.error.HTTPError'>,HTTP Error 503: Service Unavailable
+Error in matchDetails(1838332135): <class 'urllib.error.HTTPError'>,HTTP Error 503: Service Unavailable
+Error in matchDetails(1838332135): <class 'urllib.error.HTTPError'>,HTTP Error 503: Service Unavailable
+Error in matchDetails(1838332135): <class 'urllib.error.HTTPError'>,HTTP Error 503: Service Unavailable
+Error in matchDetails(1838332135): <class 'urllib.error.HTTPError'>,HTTP Error 503: Service Unavailable
+Error in matchDetails(1838332135): <class 'urllib.error.HTTPError'>,HTTP Error 503: Service Unavailable
+Error in matchDetails(1838332135): <class 'urllib.error.HTTPError'>,HTTP Error 503: Service Unavailable
+Error in matchDetails(1838332135): <class 'urllib.error.HTTPError'>,HTTP Error 503: Service Unavailable
+Error in matchDetails(1838332135): <class 'urllib.error.HTTPError'>,HTTP Error 503: Service Unavailable
+Error in matchDetails(1838332135): <class 'urllib.error.HTTPError'>,HTTP Error 503: Service Unavailable
+Error in matchDetails(1838332135): <class 'urllib.error.HTTPError'>,HTTP Error 503: Service Unavailable
+Error in matchDetails(1838332135): <class 'urllib.error.HTTPError'>,HTTP Error 503: Service Unavailable
+Error in matchDetails(1838332135): <class 'urllib.error.HTTPError'>,HTTP Error 503: Service Unavailable
+Error in matchDetails(1838332135): <class 'urllib.error.HTTPError'>,HTTP Error 503: Service Unavailable
+Error in matchDetails(1838332135): <class 'urllib.error.HTTPError'>,HTTP Error 503: Service Unavailable
+Error in matchDetails(1838332135): <class 'urllib.error.HTTPError'>,HTTP Error 503: Service Unavailable
+Error in matchDetails(1838332135): <class 'urllib.error.HTTPError'>,HTTP Error 503: Service Unavailable
+Error in matchDetails(1838332135): <class 'urllib.error.HTTPError'>,HTTP Error 503: Service Unavailable
+Error in matchDetails(1838332135): <class 'urllib.error.HTTPError'>,HTTP Error 503: Service Unavailable
+Error in matchDetails(1838332135): <class 'urllib.error.HTTPError'>,HTTP Error 503: Service Unavailable
+Error in matchDetails(1838332135): <class 'urllib.error.HTTPError'>,HTTP Error 503: Service Unavailable
+Error in matchDetails(1838332135): <class 'urllib.error.HTTPError'>,HTTP Error 503: Service Unavailable
+Error in matchDetails(1838332135): <class 'urllib.error.HTTPError'>,HTTP Error 503: Service Unavailable
+Error in matchDetails(1838332135): <class 'urllib.error.HTTPError'>,HTTP Error 503: Service Unavailable
+Error in matchDetails(1838332135): <class 'urllib.error.HTTPError'>,HTTP Error 503: Service Unavailable
+Error in matchDetails(1838332135): <class 'urllib.error.HTTPError'>,HTTP Error 503: Service Unavailable
+Error in matchDetails(1838332135): <class 'urllib.error.HTTPError'>,HTTP Error 503: Service Unavailable
+Error in matchDetails(1838332135): <class 'urllib.error.HTTPError'>,HTTP Error 503: Service Unavailable
+Error in matchDetails(1838332135): <class 'urllib.error.HTTPError'>,HTTP Error 503: Service Unavailable
+Error in matchDetails(1838332135): <class 'urllib.error.HTTPError'>,HTTP Error 503: Service Unavailable
+Error in matchDetails(1838332135): <class 'urllib.error.HTTPError'>,HTTP Error 503: Service Unavailable
+Error in matchDetails(1838332135): <class 'urllib.error.HTTPError'>,HTTP Error 503: Service Unavailable
+Error in matchDetails(1838332135): <class 'urllib.error.HTTPError'>,HTTP Error 503: Service Unavailable
+Error in matchDetails(1838332135): <class 'urllib.error.HTTPError'>,HTTP Error 503: Service Unavailable
+Error in matchDetails(1838332135): <class 'urllib.error.HTTPError'>,HTTP Error 503: Service Unavailable
+Error in matchDetails(1838332135): <class 'urllib.error.HTTPError'>,HTTP Error 503: Service Unavailable
+Error in matchDetails(1838332135): <class 'urllib.error.HTTPError'>,HTTP Error 503: Service Unavailable
+Error in matchDetails(1838332135): <class 'urllib.error.HTTPError'>,HTTP Error 503: Service Unavailable
+Error in matchDetails(1838332135): <class 'urllib.error.HTTPError'>,HTTP Error 503: Service Unavailable
+Error in matchDetails(1838332135): <class 'urllib.error.HTTPError'>,HTTP Error 503: Service Unavailable
+Error in matchDetails(1838332135): <class 'urllib.error.HTTPError'>,HTTP Error 503: Service Unavailable
+Error in matchDetails(1838332135): <class 'urllib.error.HTTPError'>,HTTP Error 503: Service Unavailable
+Error in matchDetails(1838332135): <class 'urllib.error.HTTPError'>,HTTP Error 503: Service Unavailable
+Error in matchDetails(1838332135): <class 'urllib.error.HTTPError'>,HTTP Error 503: Service Unavailable
+Error in matchDetails(1838332135): <class 'urllib.error.HTTPError'>,HTTP Error 503: Service Unavailable
+Error in matchDetails(1838332135): <class 'urllib.error.HTTPError'>,HTTP Error 503: Service Unavailable
+Error in matchDetails(1838332135): <class 'urllib.error.HTTPError'>,HTTP Error 503: Service Unavailable
+Error in matchDetails(1838332135): <class 'urllib.error.HTTPError'>,HTTP Error 503: Service Unavailable
+Error in matchDetails(1838332135): <class 'urllib.error.HTTPError'>,HTTP Error 503: Service Unavailable
+Error in matchDetails(1838332135): <class 'urllib.error.HTTPError'>,HTTP Error 503: Service Unavailable
+Error in matchDetails(1838332135): <class 'urllib.error.HTTPError'>,HTTP Error 503: Service Unavailable
+Error in matchDetails(1838332135): <class 'urllib.error.HTTPError'>,HTTP Error 503: Service Unavailable
+Error in matchDetails(1838332135): <class 'urllib.error.HTTPError'>,HTTP Error 503: Service Unavailable
+Error in matchDetails(1838332135): <class 'urllib.error.HTTPError'>,HTTP Error 503: Service Unavailable
+Error in matchDetails(1838332135): <class 'urllib.error.HTTPError'>,HTTP Error 503: Service Unavailable
+Error in matchDetails(1838332135): <class 'urllib.error.HTTPError'>,HTTP Error 503: Service Unavailable
+Error in matchDetails(1838332135): <class 'urllib.error.HTTPError'>,HTTP Error 503: Service Unavailable
+Error in matchDetails(1838332135): <class 'urllib.error.HTTPError'>,HTTP Error 503: Service Unavailable
+Max Attempts reached in matchDetails(1838332135)
+Error in matchDetails(1838332134): <class 'urllib.error.HTTPError'>,HTTP Error 503: Service Unavailable
+Error in matchDetails(1838332134): <class 'urllib.error.HTTPError'>,HTTP Error 503: Service Unavailable
+Error in matchDetails(1838331977): player mismatch
+Error in matchDetails(1838331631): player mismatch
+Error in matchDetails(1838331579): player mismatch
