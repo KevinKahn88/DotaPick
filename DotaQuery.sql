@@ -1,5 +1,8 @@
 USE Dota
 
+
+
+/*
 SELECT SUM(T1.wins)/SUM(T1.total) FROM
     (SELECT SUM(CAST(Rad_Win as float)) as wins, COUNT(Rad_Win) as total
     FROM Matches WHERE 
@@ -14,7 +17,7 @@ SELECT SUM(T1.wins)/SUM(T1.total) FROM
     Leavers = 0 AND
     Duration < 50*60 AND Duration > 40*60 AND 
     1 in (Dir_Hero1, Dir_Hero2, Dir_Hero3, Dir_Hero4, Dir_Hero5)) T1
-
+*/
 --EXEC sp_spaceused  Matches
 
 

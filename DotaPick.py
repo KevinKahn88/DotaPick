@@ -44,13 +44,36 @@ def heroes():
         heroDict[entry['localized_name']] = entry['id']
     return heroDict
 
+def updateStats(curs):
+    global maxHero
+    
+    counterFile = open('counterStats.csv','w')
+    allyFile = open('allyStats.csv','w')
+    baseFile = open('baseStats.csv','w')
+    
+    baseStats = baseWin(curs)
+    baseFile.write(','.join([str(x) for x in baseStats]))
+    baseFile.write('\n')
+    baseFile.close()
+    
+    for i in range(maxHero):
+        print(i)
+        counterInfo = counter(curs,i+1)
+        partnerInfo = partner(curs,i+1)
+        print(','.join([str(x) for x in counterInfo]))
+        print(','.join([str(x) for x in partnerInfo]))
+        counterFile.write(','.join([str(x) for x in counterInfo]))
+        counterFile.write('\n')
+        allyFile.write(','.join([str(x) for x in partnerInfo]))
+        allyFile.write('\n') 
+    counterFile.close()
+    allyFile.close()
+
 # Finds the % of wins for every hero against heroID
 def counter(cursor,heroID):
     global maxHero
     
     # SQL Command Template
-    # '#' represents the hero's ID
-    # '$' represents the counter hero's ID
     command = '''
     SELECT SUM(T1.wins)/SUM(T1.total) FROM
     (SELECT SUM(CAST(Rad_Win as float)) as wins, COUNT(Rad_Win) as total
@@ -68,7 +91,7 @@ def counter(cursor,heroID):
     HERO_ID in (Rad_Hero1, Rad_Hero2, Rad_Hero3, Rad_Hero4, Rad_Hero5)) T1
     '''
     command = re.sub('HERO_ID',str(heroID),command)
-    counterWin = [0 for x in range(maxHero)] 
+    counterWin = [float('nan') for x in range(maxHero)] 
     for idNum in range(maxHero):
         if heroID is not idNum+1:
             winrate = cursor.execute(re.sub('COUNTER_ID',str(idNum+1),command)).fetchone()[0]
@@ -80,7 +103,7 @@ def counter(cursor,heroID):
 def partner(cursor,heroID):
     global maxHero
     
-    # Command Template given hero in Radiance
+    # Command Template for checking winrate if hero and partner on same team
     command = '''
     SELECT SUM(T1.wins)/SUM(T1.total) FROM
     (SELECT SUM(CAST(Rad_Win as float)) as wins, COUNT(Rad_Win) as total
@@ -99,13 +122,38 @@ def partner(cursor,heroID):
     '''
     command = re.sub('HERO_ID',str(heroID),command)
     
-    partnerWin = [0 for x in range(maxHero)] 
+    partnerWin = [float('nan') for x in range(maxHero)] 
     for idNum in range(maxHero):
         if heroID is not idNum+1:
             winrate = cursor.execute(re.sub('PARTNER_ID',str(idNum+1),command)).fetchone()[0]
             if winrate is not None:
                 partnerWin[idNum] = winrate
     return partnerWin
+
+def baseWin(cursor):
+    global maxHero
+    command = '''
+    SELECT SUM(T1.wins)/SUM(T1.total) FROM
+    (SELECT SUM(CAST(Rad_Win as float)) as wins, COUNT(Rad_Win) as total
+    FROM Matches WHERE 
+    Humans = 10 AND 
+    Leavers = 0 AND 
+    HERO_ID in (Rad_Hero1, Rad_Hero2, Rad_Hero3, Rad_Hero4, Rad_Hero5)
+    UNION
+    SELECT SUM(1-CAST(Rad_Win as float)) as wins, COUNT(Rad_Win) as total
+    FROM Matches WHERE 
+    Humans = 10 AND 
+    Leavers = 0 AND 
+    HERO_ID in (Dir_Hero1, Dir_Hero2, Dir_Hero3, Dir_Hero4, Dir_Hero5)) T1
+    '''
+    
+    baseWin = [float('nan') for x in range(maxHero)]
+    for idNum in range(maxHero):
+        winrate = cursor.execute(re.sub('HERO_ID',str(idNum+1),command)).fetchone()[0]
+        if winrate is not None:
+            baseWin[idNum] = winrate
+    print(baseWin)
+    return baseWin
 
 # Function to analyze win % given teammates/opponents
 def AnalyzePicks(teammates,opponents):
@@ -157,26 +205,11 @@ def winTime(cursor,heroID,durations):
     winrates.append(cursor.fetchone()[0])
     return winrates
 
-command = '''
-SELECT SUM(T1.wins)/SUM(T1.total) FROM
-(SELECT SUM(CAST(Rad_Win as float)) as wins, COUNT(Rad_Win) as total
-FROM Matches WHERE 
-Humans = 10 AND 
-Leavers = 0 AND
-Duration Command AND 
-1 in (Rad_Hero1, Rad_Hero2, Rad_Hero3, Rad_Hero4, Rad_Hero5) 
-UNION
-SELECT SUM(1-CAST(Rad_Win as float)) as wins, COUNT(Rad_Win) as total
-FROM Matches WHERE 
-Humans = 10 AND 
-Leavers = 0 AND
-Duration Command AND 
-1 in (Dir_Hero1, Dir_Hero2, Dir_Hero3, Dir_Hero4, Dir_Hero5)) T1
-'''
-
 if __name__ == '__main__':
     conn = Server.connectSQL();
     cursor = conn.cursor()
+    updateStats(cursor)
+    '''
     dur = [30,35,40,45,50,55,60,65,70]
     durationWins = winTime(cursor,1,[x*60 for x in dur])
     print(durationWins)
@@ -217,3 +250,4 @@ if __name__ == '__main__':
     #print(Server.addBatchesBySeq(conn,{'start_at_match_seq_num': 1447667929},50000))
     #antimagePartner = partner(cursor,1)
     #antimageCounter = counter(cursor,1)
+    '''
