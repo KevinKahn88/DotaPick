@@ -1,6 +1,93 @@
 USE Dota
+SELECT COUNT(*) FROM Matches WHERE Humans = 10 AND Leavers = 0
 
+/*
+SELECT SUM(T1.wins)/SUM(T1.total) as SK_WIN FROM
+(SELECT SUM(CAST(Rad_Win as float)) as wins, COUNT(Rad_Win) as total
+FROM Matches WHERE 
+Humans = 10 AND 
+Leavers = 0 AND 
+42 in (Rad_Hero1, Rad_Hero2, Rad_Hero3, Rad_Hero4, Rad_Hero5)
+UNION
+SELECT SUM(1-CAST(Rad_Win as float)) as wins, COUNT(Rad_Win) as total
+FROM Matches WHERE 
+Humans = 10 AND 
+Leavers = 0 AND 
+42 in (Dir_Hero1, Dir_Hero2, Dir_Hero3, Dir_Hero4, Dir_Hero5)) T1
 
+SELECT SUM(T1.wins)/SUM(T1.total) as AM_WIN FROM
+(SELECT SUM(CAST(Rad_Win as float)) as wins, COUNT(Rad_Win) as total
+FROM Matches WHERE 
+Humans = 10 AND 
+Leavers = 0 AND 
+1 in (Rad_Hero1, Rad_Hero2, Rad_Hero3, Rad_Hero4, Rad_Hero5)
+UNION
+SELECT SUM(1-CAST(Rad_Win as float)) as wins, COUNT(Rad_Win) as total
+FROM Matches WHERE 
+Humans = 10 AND 
+Leavers = 0 AND 
+1 in (Dir_Hero1, Dir_Hero2, Dir_Hero3, Dir_Hero4, Dir_Hero5)) T1
+
+SELECT SUM(T1.wins)/SUM(T1.total) as SK_WIN_WITH_AM FROM
+(SELECT SUM(CAST(Rad_Win as float)) as wins, COUNT(Rad_Win) as total
+FROM Matches WHERE 
+Humans = 10 AND 
+Leavers = 0 AND 
+42 in (Rad_Hero1, Rad_Hero2, Rad_Hero3, Rad_Hero4, Rad_Hero5) AND 
+1 in (Dir_Hero1, Dir_Hero2, Dir_Hero3, Dir_Hero4, Dir_Hero5)
+UNION
+SELECT SUM(1-CAST(Rad_Win as float)) as wins, COUNT(Rad_Win) as total
+FROM Matches WHERE 
+Humans = 10 AND 
+Leavers = 0 AND 
+42 in (Dir_Hero1, Dir_Hero2, Dir_Hero3, Dir_Hero4, Dir_Hero5) AND 
+1 in (Rad_Hero1, Rad_Hero2, Rad_Hero3, Rad_Hero4, Rad_Hero5)) T1
+
+SELECT SUM(T1.wins)/SUM(T1.total) as SK_WIN_WITHOUT_AM FROM
+(SELECT SUM(CAST(Rad_Win as float)) as wins, COUNT(Rad_Win) as total
+FROM Matches WHERE 
+Humans = 10 AND 
+Leavers = 0 AND 
+42 in (Rad_Hero1, Rad_Hero2, Rad_Hero3, Rad_Hero4, Rad_Hero5) AND 
+1 not in (Dir_Hero1, Dir_Hero2, Dir_Hero3, Dir_Hero4, Dir_Hero5)
+UNION
+SELECT SUM(1-CAST(Rad_Win as float)) as wins, COUNT(Rad_Win) as total
+FROM Matches WHERE 
+Humans = 10 AND 
+Leavers = 0 AND 
+42 in (Dir_Hero1, Dir_Hero2, Dir_Hero3, Dir_Hero4, Dir_Hero5) AND 
+1 not in (Rad_Hero1, Rad_Hero2, Rad_Hero3, Rad_Hero4, Rad_Hero5)) T1
+
+SELECT SUM(T1.wins)/SUM(T1.total) as AM_WIN_WITH_SK FROM
+(SELECT SUM(CAST(Rad_Win as float)) as wins, COUNT(Rad_Win) as total
+FROM Matches WHERE 
+Humans = 10 AND 
+Leavers = 0 AND 
+1 in (Rad_Hero1, Rad_Hero2, Rad_Hero3, Rad_Hero4, Rad_Hero5) AND 
+42 in (Dir_Hero1, Dir_Hero2, Dir_Hero3, Dir_Hero4, Dir_Hero5)
+UNION
+SELECT SUM(1-CAST(Rad_Win as float)) as wins, COUNT(Rad_Win) as total
+FROM Matches WHERE 
+Humans = 10 AND 
+Leavers = 0 AND 
+1 in (Dir_Hero1, Dir_Hero2, Dir_Hero3, Dir_Hero4, Dir_Hero5) AND 
+42 in (Rad_Hero1, Rad_Hero2, Rad_Hero3, Rad_Hero4, Rad_Hero5)) T1
+
+SELECT SUM(T1.wins)/SUM(T1.total) as AM_WIN_WITHOUT_SK FROM
+(SELECT SUM(CAST(Rad_Win as float)) as wins, COUNT(Rad_Win) as total
+FROM Matches WHERE 
+Humans = 10 AND 
+Leavers = 0 AND 
+1 in (Rad_Hero1, Rad_Hero2, Rad_Hero3, Rad_Hero4, Rad_Hero5) AND 
+42 not in (Dir_Hero1, Dir_Hero2, Dir_Hero3, Dir_Hero4, Dir_Hero5)
+UNION
+SELECT SUM(1-CAST(Rad_Win as float)) as wins, COUNT(Rad_Win) as total
+FROM Matches WHERE 
+Humans = 10 AND 
+Leavers = 0 AND 
+1 in (Dir_Hero1, Dir_Hero2, Dir_Hero3, Dir_Hero4, Dir_Hero5) AND 
+42 not in (Rad_Hero1, Rad_Hero2, Rad_Hero3, Rad_Hero4, Rad_Hero5)) T1
+*/
 
 /*
 SELECT SUM(T1.wins)/SUM(T1.total) FROM

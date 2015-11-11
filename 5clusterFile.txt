@@ -1,0 +1,117 @@
+17.740203427912974
+0
+Anti-Mage
+Bloodseeker
+Drow Ranger
+Juggernaut
+Phantom Lancer
+Storm Spirit
+Sven
+Riki
+Faceless Void
+Skeleton King
+Phantom Assassin
+Templar Assassin
+Dragon Knight
+Lifestealer
+Clinkz
+Huskar
+Night Stalker
+Spectre
+Ursa
+Spirit Breaker
+Alchemist
+Chaos Knight
+Naga Siren
+Slark
+Legion Commander
+Terrorblade
+1
+Mirana
+Morphling
+Shadow Fiend
+Pudge
+Razor
+Tiny
+Windranger
+Zeus
+Lina
+Shadow Shaman
+Slardar
+Tidehunter
+Tinker
+Sniper
+Necrophos
+Queen of Pain
+Venomancer
+Pugna
+Viper
+Clockwerk
+Leshrac
+Omniknight
+Bounty Hunter
+Weaver
+Doom
+Gyrocopter
+Silencer
+Brewmaster
+Lone Druid
+Meepo
+Ogre Magi
+Undying
+Nyx Assassin
+Medusa
+Troll Warlord
+Centaur Warrunner
+Magnus
+Bristleback
+Tusk
+Abaddon
+Ember Spirit
+Abyssal Underlord
+2
+Axe
+Bane
+Sand King
+Enigma
+Death Prophet
+Dark Seer
+Enchantress
+Broodmother
+Jakiro
+Batrider
+Chen
+Outworld Devourer
+Treant Protector
+Visage
+Oracle
+3
+Vengeful Spirit
+Beastmaster
+Luna
+Nature's Prophet
+Lycanthrope
+4
+Crystal Maiden
+Earthshaker
+Puck
+Kunkka
+Lion
+Witch Doctor
+Lich
+Warlock
+Dazzle
+Ancient Apparition
+Invoker
+Shadow Demon
+Rubick
+Disruptor
+Keeper of the Light
+Wisp
+Timbersaw
+Skywrath Mage
+Elder Titan
+Techies
+Earth Spirit
+Phoenix
+Winter Wyvern

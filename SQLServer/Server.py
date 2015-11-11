@@ -5,7 +5,7 @@ Created on Sep 16, 2015
 '''
 
 import pypyodbc
-from . import Dotabuff
+from SQLServer import DotaAPI
 
 def createTable(cursor):
     cursor.execute('''
@@ -55,10 +55,10 @@ def addBatchesBySeq(conn,prop,n):
     try:
         lastMatchSeq = prop['start_at_match_seq_num']
     except KeyError:
-        (matchIDs,lastRequest,e) = Dotabuff.getMatches(prop,lastRequest)
+        (matchIDs,lastRequest,e) = DotaAPI.getMatches(prop,lastRequest)
         if e != 0:
             return (0,-1)
-        (details,lastRequest,e) = Dotabuff.matchDetails(matchIDs[0],lastRequest)
+        (details,lastRequest,e) = DotaAPI.matchDetails(matchIDs[0],lastRequest)
         if e != 0:
             print(e)
             return (0,-2) 
@@ -66,7 +66,7 @@ def addBatchesBySeq(conn,prop,n):
     prop['matches_requested'] = batchSize
     for ind in range(n):
         prop['start_at_match_seq_num'] = lastMatchSeq
-        (batchInfo,lastMatchSeq,lastRequest,e) = Dotabuff.batchDetails(prop,lastRequest)
+        (batchInfo,lastMatchSeq,lastRequest,e) = DotaAPI.batchDetails(prop,lastRequest)
         if e == 0:
             batch_list = []
             for match in batchInfo:
@@ -138,13 +138,13 @@ def addBatchesByID(conn,prop,n):
             first = False
         else:
             prop['start_at_match_id'] = lastMatch-1
-        (matchList,lastRequest,e) = Dotabuff.getMatches(prop,lastRequest)
+        (matchList,lastRequest,e) = DotaAPI.getMatches(prop,lastRequest)
         if e == 0:
             for match in matchList:
                 print(match)
                 cursor.execute('SELECT * FROM Matches WHERE MatchID=' + str(match))
                 if len(cursor.fetchall())==0:
-                    (details,lastRequest,e) = Dotabuff.matchDetails(match,lastRequest)
+                    (details,lastRequest,e) = DotaAPI.matchDetails(match,lastRequest)
                     if e == 0:
                         if details['Mode'] in [1,2,3,4,5,16,22]:
                             addMatchEntry(cursor,details)
@@ -154,7 +154,7 @@ def addBatchesByID(conn,prop,n):
             conn.commit()
         else:
             break
-    Dotabuff.logError('Exiting Batch Run, Last Match:' + lastMatch)
+    DotaAPI.logError('Exiting Batch Run, Last Match:' + lastMatch)
 
 def updateEntries(conn):
     batchSize = 100
@@ -177,14 +177,14 @@ def updateEntries(conn):
         print(str(ind) + ' out of ' + str(batchN))
         batch_list = []
         for match in idList[(ind*batchSize):((ind+1)*batchSize)]:
-            (details,lastRequest,e) = Dotabuff.matchDetails(match,lastRequest)
+            (details,lastRequest,e) = DotaAPI.matchDetails(match,lastRequest)
             if e == 0:
                 batch_list.append([details[key] for key in (keyList[1:len(keyList)]+[keyList[0]])])
         if len(batch_list)>0:
             conn.cursor().executemany(command,batch_list)
             conn.commit()
     for match in idList[(batchN*batchSize):len(idList)]:
-        (details,lastRequest,e) = Dotabuff.matchDetails(match,lastRequest)
+        (details,lastRequest,e) = DotaAPI.matchDetails(match,lastRequest)
         if e == 0:
             batch_list.append([details[key] for key in (keyList[1:len(keyList)]+[keyList[0]])])
     if len(batch_list)>0:
@@ -203,7 +203,7 @@ def addMatches(conn,startID,n):
         print(matchID)
         cursor.execute('SELECT * FROM Matches WHERE MatchID=' + str(matchID))
         if len(cursor.fetchall())==0:
-            (details,lastRequest,e) = Dotabuff.matchDetails(matchID,lastRequest)
+            (details,lastRequest,e) = DotaAPI.matchDetails(matchID,lastRequest)
             if e==0:
                 batch_list.append([details[key] for key in keyList])
     print(batch_list)

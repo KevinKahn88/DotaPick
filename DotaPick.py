@@ -15,18 +15,17 @@ maxHero = 112
 radList = '(RadHero1, RadHero2, RadHero3, RadHero4, RadHero5)'
 dirList = '(DirHero1, DirHero2, DirHero3, DirHero4, DirHero5)'
 
-#
+# Read data from JSON file
 def readJSON(fileName):
     jsondata = readFile(fileName)
     data = json.loads(jsondata)
     return data
 
-#
+# Read in an entire file
 def readFile(fileName):
     with open(fileName,'r') as f:
         return f.read()
     
-
 # Logistic function
 def logistic(num):
     return 1/(1+math.pow(math.e,-num))
