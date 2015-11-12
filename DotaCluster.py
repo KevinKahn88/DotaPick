@@ -114,9 +114,35 @@ class HeroCluster(object):
         while changeCount > delta:
             changeCount = self.iterate2()
             
-
-heroDict = heroes()
-heroIndDict = {ind-1:key for key,ind in heroDict.items()}
+    def fileWrite(self,fname):
+        heroDict = heroes()
+        heroIndDict = {ind-1:key for key,ind in heroDict.items()}
+        clusterFile = open(fname,'w')
+        clusterFile.write(str(self.cost) + '\n')
+        clusterFile.write(str(self.num_cluster) + '\n')
+        for i in range(self.num_cluster):
+            clusterFile.write(str(i) + '\n')
+            for j in range(self.maxHero):
+                if self.cluster[j] == i:
+                    try:
+                        clusterFile.write(heroIndDict[j] + '\n')
+                    except KeyError:
+                        pass
+        clusterFile.close()
+        
+    def fileRead(self,fname):
+        heroDict = heroes()
+        clusterFile = open(fname)
+        self.cost = float(clusterFile.readline().split('\n')[0])
+        self.num_cluster = int(clusterFile.readline().split('\n')[0])
+        fileLine = clusterFile.readline().split('\n')[0]
+        while fileLine != '':
+            try:
+                clust = int(fileLine)
+            except ValueError:
+                self.cluster[heroDict[fileLine]-1] = clust
+            fileLine = clusterFile.readline().split('\n')[0]
+'''
 for num_clust in range(2,7):
     dotaCluster = HeroCluster(num_clust)
     dotaCluster.findCluster(0)
@@ -127,14 +153,5 @@ for num_clust in range(2,7):
         test.findCluster(0)
         if dotaCluster.cost > test.cost:
             dotaCluster = test
-    clusterFile = open(str(num_clust) + 'clusterFile.txt','w')
-    clusterFile.write(str(test.cost) + '\n')
-    for i in range(num_clust):
-        clusterFile.write(str(i) + '\n')
-        for j in range(dotaCluster.maxHero):
-            if dotaCluster.cluster[j] == i:
-                try:
-                    clusterFile.write(heroIndDict[j] + '\n')
-                except KeyError:
-                    pass
-    clusterFile.close()        
+    dotaCluster.fileWrite(str(num_clust) + 'clusterFile.txt')
+''' 
