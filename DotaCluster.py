@@ -8,7 +8,7 @@ from DotaPickGUI import heroes
 from DotaPickGUI import loadStats
 from DotaPickGUI import logit
 from DotaPickGUI import logistic
-from statistics import variance as var
+import statistics as stat
 from math import isnan
 
 class HeroCluster(object):
@@ -39,9 +39,8 @@ class HeroCluster(object):
         self.cost = self.clusterCost()
         
         self.heroIndDict = {ind-1:key for key,ind in heroes().items()}
-            
-    def clusterCost(self):
-        # teamStats[cluster1][cluster2] = list of group stats that fall in cluster1,cluster2 team
+    
+    def calcTeamStats(self):
         teamStats = [[[] for x in range(y+1)] for y in range(self.num_cluster)]
         for hero1 in range(self.maxHero):
             for hero2 in  range(hero1):
@@ -49,12 +48,29 @@ class HeroCluster(object):
                 hero_list = sorted([hero1,hero2],reverse=True)
                 if not isnan(self.groupStat[hero_list[0]][hero_list[1]]):
                     teamStats[cluster_list[0]][cluster_list[1]].append(self.groupStat[hero_list[0]][hero_list[1]])
-        cost = 0
+        return teamStats
+
+    def calcStatFunc(self,func):
+        funcStat = []
+        teamStats = self.calcTeamStats()
         for clust1 in range(self.num_cluster):
+            temp = []
             for clust2 in range(clust1+1):
-                n = len(teamStats[clust1][clust2])
-                if n>1:
-                    cost += var(teamStats[clust1][clust2])*(n-1)
+                if func == stat.variance and len(teamStats[clust1][clust2])<2:
+                    temp.append(0)
+                else:
+                    temp.append(func(teamStats[clust1][clust2]))
+            funcStat.append(temp)
+        return funcStat                  
+    
+    def clusterCost(self):
+        # teamStats[cluster1][cluster2] = list of group stats that fall in cluster1,cluster2 team
+        varStat = self.calcStatFunc(stat.variance)
+        nStat = self.calcStatFunc(len)
+        cost = 0
+        for x in range(len(varStat)):
+            for y in range(len(varStat[x])):
+                cost += varStat[x][y]*(nStat[x][y]-1)
         return cost
         
     def iterate(self):
@@ -142,6 +158,9 @@ class HeroCluster(object):
             except ValueError:
                 self.cluster[heroDict[fileLine]-1] = clust
             fileLine = clusterFile.readline().split('\n')[0]
+            
+    
+    
 '''
 for num_clust in range(2,7):
     dotaCluster = HeroCluster(num_clust)
