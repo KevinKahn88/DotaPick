@@ -207,8 +207,8 @@ def winTime(cursor,heroID,durations):
 if __name__ == '__main__':
     conn = Server.connectSQL();
     cursor = conn.cursor()
-    updateStats(cursor)
-    '''
+    #updateStats(cursor)
+
     dur = [30,35,40,45,50,55,60,65,70]
     durationWins = winTime(cursor,1,[x*60 for x in dur])
     print(durationWins)
@@ -232,21 +232,21 @@ if __name__ == '__main__':
     partnerWin = partner(cursor,1)
     counterWin = counter(cursor,1)
     heroData = readJSON('heroes.json')
-    fig2 = plt.figure(2)
+    fig2 = plt.figure(2,figsize=(16,6))
     ax2 = plt.subplot()
-    ind = np.arange(5)
+    ind = np.arange(20)
     width = .35
-    partnerBar = ax2.bar(ind,[100*x for x in partnerWin[1:6]],width,color = 'g')
-    counterBar = ax2.bar(ind+width,[100*x for x in counterWin[1:6]],width,color = 'r')
+    partnerBar = ax2.bar(ind,[100*x for x in partnerWin[1:21]],width,color = 'g')
+    counterBar = ax2.bar(ind+width,[100*x for x in counterWin[1:21]],width,color = 'r')
     ax2.set_ylabel('Win Rates (%)')
     ax2.set_xlabel('Heroes')
     ax2.set_title('Performance with Antimage as a Ally/Enemy')
     ax2.set_xticks(ind+width)
-    ax2.set_xticklabels([heroData['heroes'][x]['localized_name'] for x in ind+1])
+    ax2.set_xticklabels([re.sub(' ','\n',heroData['heroes'][x]['localized_name']) for x in ind+1], rotation = 'vertical')
     ax2.legend((partnerBar,counterBar),('Ally','Enemy'))
+    ax2.set_position([0.125, .25, .875, .7])
+    print(ax2.get_position())
     fig2.savefig('AM_AllyEnemy.png',bbox_inches='tight')
     plt.show()
+    
     #print(Server.addBatchesBySeq(conn,{'start_at_match_seq_num': 1447667929},50000))
-    #antimagePartner = partner(cursor,1)
-    #antimageCounter = counter(cursor,1)
-    '''
