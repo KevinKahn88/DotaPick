@@ -1,0 +1,65 @@
+Error in parseMatch(1892274890): player mismatch for
+Error in parseMatch(1892274890): player mismatch for
+Error in parseMatch(1892274890): player mismatch for
+Error in parseMatch(1892274890): player mismatch for
+Error in parseMatch(1892274890): player mismatch for
+Error in parseMatch(1892274890): player mismatch for
+Error in parseMatch(1892274890): player mismatch for
+Error in parseMatch(1892274890): player mismatch for
+Error in parseMatch(1892274890): player mismatch for
+Error in parseMatch(1892274890): player mismatch for
+Error in parseMatch(1892274890): player mismatch for
+Error in parseMatch(1892274890): player mismatch for
+Error in parseMatch(1892274890): player mismatch for
+Error in parseMatch(1892274890): player mismatch for
+Error in parseMatch(1892274890): player mismatch for
+Error in parseMatch(1892274890): player mismatch for
+Error in parseMatch(1892274890): player mismatch for
+Error in parseMatch(1892274890): player mismatch for
+Error in parseMatch(1892274890): player mismatch for
+Error in parseMatch(1892274890): player mismatch for
+Error in parseMatch(1892274890): player mismatch for
+Error in parseMatch(1892274890): player mismatch for
+Error in parseMatch(1892274890): player mismatch for
+Error in parseMatch(1892274890): player mismatch for
+Error in parseMatch(1892274890): player mismatch for
+Error in parseMatch(1892274890): player mismatch for
+Error in parseMatch(1892274890): player mismatch for
+Error in parseMatch(1892274890): player mismatch for
+Error in parseMatch(1892274890): player mismatch for
+Error in parseMatch(1892274890): player mismatch for
+Error in parseMatch(1892274890): player mismatch for
+Error in parseMatch(1892274890): player mismatch for
+Error in parseMatch(1892274890): player mismatch for
+Error in parseMatch(1892274890): player mismatch for
+Error in parseMatch(1892274890): player mismatch for
+Error in parseMatch(1892274890): player mismatch for
+Error in parseMatch(1892274890): player mismatch for
+Error in parseMatch(1892274890): player mismatch for
+Error in parseMatch(1892274890): player mismatch for
+Error in parseMatch(1892274890): player mismatch for
+Error in parseMatch(1892354235): player mismatch for
+Error in batchDetails(): <class 'urllib.error.HTTPError'>,HTTP Error 500: Internal Server Error
+Error in batchDetails(): <class 'urllib.error.HTTPError'>,HTTP Error 500: Internal Server Error
+Error in batchDetails(): <class 'urllib.error.HTTPError'>,HTTP Error 500: Internal Server Error
+Error in batchDetails(): <class 'urllib.error.HTTPError'>,HTTP Error 500: Internal Server Error
+Error in batchDetails(): <class 'urllib.error.HTTPError'>,HTTP Error 500: Internal Server Error
+Error in batchDetails(): <class 'urllib.error.HTTPError'>,HTTP Error 500: Internal Server Error
+Error in batchDetails(): <class 'urllib.error.HTTPError'>,HTTP Error 500: Internal Server Error
+Error in batchDetails(): <class 'urllib.error.HTTPError'>,HTTP Error 500: Internal Server Error
+Error in batchDetails(): <class 'urllib.error.HTTPError'>,HTTP Error 500: Internal Server Error
+Error in batchDetails(): <class 'urllib.error.HTTPError'>,HTTP Error 500: Internal Server Error
+Error in batchDetails(): <class 'urllib.error.HTTPError'>,HTTP Error 500: Internal Server Error
+Error in batchDetails(): <class 'urllib.error.HTTPError'>,HTTP Error 500: Internal Server Error
+Error in batchDetails(): <class 'urllib.error.HTTPError'>,HTTP Error 500: Internal Server Error
+Error in batchDetails(): <class 'urllib.error.HTTPError'>,HTTP Error 500: Internal Server Error
+Error in batchDetails(): <class 'urllib.error.HTTPError'>,HTTP Error 500: Internal Server Error
+Error in batchDetails(): <class 'urllib.error.HTTPError'>,HTTP Error 500: Internal Server Error
+Error in batchDetails(): <class 'urllib.error.HTTPError'>,HTTP Error 500: Internal Server Error
+Error in batchDetails(): <class 'urllib.error.HTTPError'>,HTTP Error 500: Internal Server Error
+Error in batchDetails(): <class 'urllib.error.HTTPError'>,HTTP Error 500: Internal Server Error
+Error in batchDetails(): <class 'urllib.error.HTTPError'>,HTTP Error 500: Internal Server Error
+Error in batchDetails(): <class 'urllib.error.HTTPError'>,HTTP Error 500: Internal Server Error
+Error in batchDetails(): <class 'urllib.error.HTTPError'>,HTTP Error 500: Internal Server Error
+Error in batchDetails(): <class 'urllib.error.HTTPError'>,HTTP Error 500: Internal Server Error
+Error in batchDetails(): <class 'urllib.error.HTTPError'>,HTTP Error 500: Internal Server Error
