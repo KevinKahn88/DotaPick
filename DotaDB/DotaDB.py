@@ -27,6 +27,12 @@ player_schema = [
 	'tower_damage',
 	'hero_healing',
 	'level']
+
+ability_schema = []
+for ind in range(19):	#19 is the highest ability level, valve ignores levels without upgrades
+	ability_schema += ['ability' + str(ind) + '_id']
+	ability_schema += ['ability' + str(ind) + '_time']
+	ability_schema += ['ability' + str(ind) + '_level']
 '''
 Establishes connection to psql database
 '''
@@ -46,17 +52,35 @@ def parse_players_info(players_list):
 	parsedCols = []
 	for player in players_list:
 		parsedCols += [player[x] for x in player_schema]
+		parsedCols += parse_ability(player['ability_upgrades'])
 	return parsedCols
 '''
 Converts json matches to dataframe that can export into psql
 Input: array of dictionaries (should be jsonData['result']['matches'])
 Output: dataframe
 '''
+
+'''
+Separate out array upgrades into distinct columns
+'''
+def parse_ability(ability_upgrades):
+	upgrade_num = len(ability_upgrades)
+	abilityCols = []
+	for ind in range(19):
+		if ind < upgrade_num:
+			upgrade = ability_upgrades[ind]
+			abilityCols += [upgrade['ability'],upgrade['time'],upgrade['level']]
+		else:
+			abilityCols += [None,None,None]
+	return abilityCols
+
+
 def json_to_df(matchesJson):
 	global player_schema
 	team_schema = []
 	for ind in range(10):
 		temp_schema = ['p' + str(ind) + '_' + item for item in player_schema]
+		temp_schema += ['p' + str(ind) + '_' + item for item in ability_schema]
 		team_schema += temp_schema
 
 
@@ -66,7 +90,7 @@ def json_to_df(matchesJson):
 	newcols = matchDF['players'].apply(lambda x: pd.Series(parse_players_info(x), index = team_schema))
 	matchDF[team_schema] = newcols
 	return matchDF
-
+'''
 team_schema = []
 for ind in range(10):
 	temp_schema = ['p' + str(ind) + '_' + item for item in player_schema]
@@ -77,3 +101,4 @@ matchDF = pd.DataFrame(matchData)
 matchDF = matchDF[matchDF['human_players']==10]
 newcols = matchDF['players'].apply(lambda x: pd.Series(parse_players_info(x), index = team_schema))
 matchDF[team_schema] = newcols
+'''
