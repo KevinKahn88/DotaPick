@@ -2,6 +2,7 @@
 import pickle
 import sqlalchemy
 import pandas as pd
+from getpass import getpass
 
 test_url = 'https://api.steampowered.com/IDOTA2Match_570/GetMatchHistoryBySequenceNum/V001/?start_at_match_seq_num=2900000002&key=DFD1061664AEAC307766E3BD4C824B83'
 
@@ -74,7 +75,9 @@ def parse_ability(ability_upgrades):
 			abilityCols += [None,None,None]
 	return abilityCols
 
-
+'''
+Transforms match information stored as json into a pandas DF
+'''
 def json_to_df(matchesJson):
 	global player_schema
 	team_schema = []
@@ -89,16 +92,14 @@ def json_to_df(matchesJson):
 
 	newcols = matchDF['players'].apply(lambda x: pd.Series(parse_players_info(x), index = team_schema))
 	matchDF[team_schema] = newcols
+
+	del matchDF['players']
+	if 'picks_bans' in matchDF.keys():
+		del matchDF['picks_bans']
 	return matchDF
-'''
-team_schema = []
-for ind in range(10):
-	temp_schema = ['p' + str(ind) + '_' + item for item in player_schema]
-	team_schema += (temp_schema)	
 
 matchData = pickle.load(open('matchData.pkl','rb'))
-matchDF = pd.DataFrame(matchData)
-matchDF = matchDF[matchDF['human_players']==10]
-newcols = matchDF['players'].apply(lambda x: pd.Series(parse_players_info(x), index = team_schema))
-matchDF[team_schema] = newcols
-'''
+matchDF = json_to_df(matchData)
+pswd = getpass()
+connection = connect_to_psql('kevin',pswd,'localhost','kevin')
+matchDF.to_sql('dota_matches',connection,index=False,if_exists='replace',index_label='match_id')
