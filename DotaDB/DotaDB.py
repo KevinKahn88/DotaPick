@@ -32,7 +32,7 @@ Establishes connection to psql database
 '''
 def connect_to_psql(user,password,host,database):
 	engine_str = 'postgresql://' + user + ':' + password + '@' + host + '/' + database
-	engine = sqlalchemy.creat_engine(engine_str)
+	engine = sqlalchemy.create_engine(engine_str)
 	connection = engine.connect()
 	return connection
 
@@ -44,8 +44,9 @@ def parse_players_info(players_list):
 	global player_schema
 
 	parsedCols = []
-	for player in enumerate(players_list):
-		parsedCols.append([player[x] for x in player_schema])
+	for player in players_list:
+		parsedCols += [player[x] for x in player_schema]
+	return parsedCols
 '''
 Converts json matches to dataframe that can export into psql
 Input: array of dictionaries (should be jsonData['result']['matches'])
@@ -56,16 +57,23 @@ def json_to_df(matchesJson):
 	team_schema = []
 	for ind in range(10):
 		temp_schema = ['p' + str(ind) + '_' + item for item in player_schema]
-		team_schema.append(temp_schema)
+		team_schema += temp_schema
 
 
 	matchDF = pd.DataFrame(matchesJson)
 	matchDF = matchDF[matchDF['human_players']==10]
 
-	matchDF[team_schema] = matchDF['players'].apply(parse_players_info)
+	newcols = matchDF['players'].apply(lambda x: pd.Series(parse_players_info(x), index = team_schema))
+	matchDF[team_schema] = newcols
 	return matchDF
+
+team_schema = []
+for ind in range(10):
+	temp_schema = ['p' + str(ind) + '_' + item for item in player_schema]
+	team_schema += (temp_schema)	
 
 matchData = pickle.load(open('matchData.pkl','rb'))
 matchDF = pd.DataFrame(matchData)
 matchDF = matchDF[matchDF['human_players']==10]
-players_info = matchDF['players'][0]
+newcols = matchDF['players'].apply(lambda x: pd.Series(parse_players_info(x), index = team_schema))
+matchDF[team_schema] = newcols
