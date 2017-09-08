@@ -8,7 +8,7 @@ p0_item_0					int
 p0_item_5					int
 p0_kills					int
 p0_deaths					int
-p0_assits					int
+p0_assists					int
 p0_leaver_status			int
 p0_gold 					int
 p0_last_hits				int
