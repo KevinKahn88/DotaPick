@@ -3,7 +3,6 @@ DotaAPI controls calls to Valve's API
 
 '''
 
-
 from urllib.request import urlopen
 from urllib.error import HTTPError
 import json
@@ -26,10 +25,11 @@ def api_match_call(apiCall):
 		rawData = apiResponse.read().decode('utf-8')
 		jsonData = json.loads(rawData)
 		matchData = jsonData['result']['matches']
-		return [json,0,None]
+		return [matchData,0,None]
 	except HTTPError as err:
 		print(err)
 		return [None,err.code,err.reason]
+
 '''
 Form DotaAPI url from a dictionary of properties
 Key is already included
@@ -44,3 +44,5 @@ def form_api_url(prop):
 
 prop = {'start_at_match_seq_num':'2900000002'}
 test = api_match_call(form_api_url(prop))
+
+def get_match_batch():
