@@ -2,9 +2,6 @@
 import pickle
 import sqlalchemy
 import pandas as pd
-from getpass import getpass
-
-test_url = 'https://api.steampowered.com/IDOTA2Match_570/GetMatchHistoryBySequenceNum/V001/?start_at_match_seq_num=2900000002&key=DFD1061664AEAC307766E3BD4C824B83'
 
 PLAYER_SCHEMA = [
 	'account_id',
@@ -53,7 +50,10 @@ def parse_players_info(players_list):
 	parsedCols = []
 	for player in players_list:
 		parsedCols += [player[x] for x in PLAYER_SCHEMA]
-		parsedCols += parse_ability(player['ability_upgrades'])
+		if 'ability_upgrades' in player.keys():
+			parsedCols += parse_ability(player['ability_upgrades'])
+		else:	#Entered if no abilities upgraded
+			parsedCols += [None]*3*19
 	return parsedCols
 '''
 Converts json matches to dataframe that can export into psql
