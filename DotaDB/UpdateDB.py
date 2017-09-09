@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 import DotaDB
 import DotaAPI
 import time
