@@ -42,6 +42,4 @@ def form_api_url(prop):
 		url += '&' + key + '=' + value
 	return url
 
-test = api_match_call(form_api_url(prop))
-
 
