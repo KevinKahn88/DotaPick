@@ -1,69 +1,40 @@
 Table: Matches
 
-p0_account_id				int
-p0_player_slot				int
-p0_hero_id					int
-p0_item_0					int
+p0_account_id				4e9			bigintint
+p0_player_slot				smallint
+p0_hero_id					smallint
+p0_item_0					smallint
 ...			
-p0_item_5					int
-p0_kills					int
-p0_deaths					int
-p0_assists					int
-p0_leaver_status			int
-p0_gold 					int
-p0_last_hits				int
-p0_denies					int
-p0_gold_per_min				int
-p0_xp_per_min				int
-p0_gold_spent				int
-p0_hero_damage				int
-p0_tower_damage				int
-p0_hero_healing				int
-p0_level					int
-p0_ability_upgrades			composite ability_upgrade
-p0_additional_units			composite additional_unit
+p0_item_5					smallint
+p0_kills					smallint
+p0_deaths					smallint
+p0_assists					smallint
+p0_leaver_status			smallint
+p0_gold 					smallint
+p0_last_hits				smallint
+p0_denies					smallint
+p0_gold_per_min				smallint
+p0_xp_per_min				smallint
+p0_gold_spent				smallint
+p0_hero_damage				smallint
+p0_tower_damage				smallint
+p0_hero_healing				smallint
+p0_level					smallint
+p0_ability0_id				smallint
+p0_ability0_time			smallint
 ...
-season						int
-radiant_win					binary
-duration 					int
-start_time					int
-match_id					int
-match_seq_num				int
-tower_status_radiant		int
-tower_status_dire			int
-barracks_status_radiant		int
-barracks_status_dire		int
-cluster						int
-first_blood_time			int
-lobby_type					int
-human_players				int
-league_id					int
-positive_votes				int
-negative_votes				int
-game_mode					int
-pick_bans					composite pick_ban
-flags						int
-engine						int
-radiant_score				int
-dire_score					int
-pre_game_duration			int
-
-Composite: ability_upgrade
-ability 					int
-time 						int
-level 						int
-
-Composite: additional_unit
-unit_name					varchar(50) 					
-item_0 						int
-item_1 						int
-item_2 						int
-item_3 						int
-item_4 						int
-item_5 						int
-
-Composite: pick_ban
-is_pick 					binary
-hero_id 					int
-team 						int
-order 						int
+radiant_win								binary
+duration 					9178		smallint
+start_time					1.5e9		bigint
+match_id					3e9			bigint
+match_seq_num				2e9			bigint
+tower_status_radiant		65535		int
+tower_status_dire			65535		int
+barracks_status_radiant		63			smallint
+barracks_status_dire		63			smallint
+cluster						261			smallint
+first_blood_time			2921		int
+lobby_type					~10 		smallint
+leagueid					5099		smallint
+game_mode					~20 		smallint
+pre_game_duration			90			smallint
