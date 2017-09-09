@@ -5,7 +5,7 @@ import pickle
 
 '''
 Returns batch of matches in json format
-Updates pickle file to newest seqeuence #
+Original match_seq_num = 2500000000
 '''
 def get_matches():
 	lastMatchSeq = pickle.load(open('.lastMatchSeq.pkl','rb'))
@@ -13,7 +13,6 @@ def get_matches():
 	apiURL = DotaAPI.form_api_url(prop)
 	[matchJSON,errCode,errReason] = DotaAPI.api_match_call(apiURL)
 	if errCode == 0:
-		#TO DO: Update pickle file to newest seq #
 		return matchJSON
 	else:
 		errorlog = open('Log\errlog.txt','a')
@@ -34,18 +33,18 @@ def main():
 	database = 'dota'
 	psql = DotaDB.connect_to_psql(user,pswd,host,database)
 
-	matchJSON = get_matches()
-	matchDF = DotaDB.json_to_df(matchJSON)
-	matchDF.to_sql('dota_matches',psql,if_exists='replace',index=False,index_label='match_id')
+	throttle = 5
+	while true:
+		time.sleep(throttle)
+		matchJSON = get_matches()
+		if matchJSON == -1:
+			throttle = throttle * 2
+		else:
+			throttle = 5
+			matchDF = DotaDB.json_to_df(matchJSON)
+			matchDF.to_sql('dota_matches',psql,if_exists='replace',index=False,index_label='match_id')
+			lastMatchSeq = matchDF['match_seq_num'][-1]
+			pickle.dump(lastMatchSeq,open('.lastMatchSeq.pkl','wb'))
 
 if __name__ == '__main__':
 	main()
-
-
-[_,pswd] = pickle.load(open('../.credentials.pkl','rb'))
-user = 'kevin'
-host = 'localhost'
-database = 'dota'
-psql = DotaDB.connect_to_psql(user,pswd,host,database)
-
-matchJSON = get_matches()
