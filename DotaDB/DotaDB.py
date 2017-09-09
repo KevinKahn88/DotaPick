@@ -6,7 +6,7 @@ from getpass import getpass
 
 test_url = 'https://api.steampowered.com/IDOTA2Match_570/GetMatchHistoryBySequenceNum/V001/?start_at_match_seq_num=2900000002&key=DFD1061664AEAC307766E3BD4C824B83'
 
-player_schema = [
+PLAYER_SCHEMA = [
 	'account_id',
 	'player_slot',
 	'item_0',
@@ -29,11 +29,11 @@ player_schema = [
 	'hero_healing',
 	'level']
 
-ability_schema = []
+ABILITY_SCHEMA = []
 for ind in range(19):	#19 is the highest ability level, valve ignores levels without upgrades
-	ability_schema += ['ability' + str(ind) + '_id']
-	ability_schema += ['ability' + str(ind) + '_time']
-	ability_schema += ['ability' + str(ind) + '_level']
+	ABILITY_SCHEMA += ['ability' + str(ind) + '_id']
+	ABILITY_SCHEMA += ['ability' + str(ind) + '_time']
+	ABILITY_SCHEMA += ['ability' + str(ind) + '_level']
 '''
 Establishes connection to psql database
 '''
@@ -48,11 +48,11 @@ Separate out players info into distinct columns
 Applied to players column in df
 '''
 def parse_players_info(players_list):
-	global player_schema
+	global PLAYER_SCHEMA
 
 	parsedCols = []
 	for player in players_list:
-		parsedCols += [player[x] for x in player_schema]
+		parsedCols += [player[x] for x in PLAYER_SCHEMA]
 		parsedCols += parse_ability(player['ability_upgrades'])
 	return parsedCols
 '''
@@ -79,11 +79,11 @@ def parse_ability(ability_upgrades):
 Transforms match information stored as json into a pandas DF
 '''
 def json_to_df(matchesJson):
-	global player_schema
+	global PLAYER_SCHEMA
 	team_schema = []
 	for ind in range(10):
-		temp_schema = ['p' + str(ind) + '_' + item for item in player_schema]
-		temp_schema += ['p' + str(ind) + '_' + item for item in ability_schema]
+		temp_schema = ['p' + str(ind) + '_' + item for item in PLAYER_SCHEMA]
+		temp_schema += ['p' + str(ind) + '_' + item for item in ABILITY_SCHEMA]
 		team_schema += temp_schema
 
 
