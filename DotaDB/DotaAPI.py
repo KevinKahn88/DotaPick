@@ -42,8 +42,6 @@ def form_api_url(prop):
 		url += '&' + key + '=' + value
 	return url
 
-prop = {'start_at_match_seq_num':'2900000002'}
 test = api_match_call(form_api_url(prop))
 
-def get_next_batch():
-	pass
+
