@@ -93,13 +93,8 @@ def json_to_df(matchesJson):
 	newcols = matchDF['players'].apply(lambda x: pd.Series(parse_players_info(x), index = team_schema))
 	matchDF[team_schema] = newcols
 
+	# Removes dictionary columns (can't be transfered into SQL)
 	del matchDF['players']
 	if 'picks_bans' in matchDF.keys():
 		del matchDF['picks_bans']
 	return matchDF
-
-matchData = pickle.load(open('matchData.pkl','rb'))
-matchDF = json_to_df(matchData)
-pswd = getpass()
-connection = connect_to_psql('kevin',pswd,'localhost','kevin')
-matchDF.to_sql('dota_matches',connection,index=False,if_exists='replace',index_label='match_id')
