@@ -45,7 +45,7 @@ def main():
 			throttle = 5
 			matchDF = DotaDB.json_to_df(matchJSON)
 			matchDF.to_sql('dota_matches',psql,if_exists='append',index=False,index_label='match_id')
-			lastMatchSeq = matchDF['match_seq_num'][-1]
+			lastMatchSeq = matchDF['match_seq_num'].max()
 			pickle.dump(lastMatchSeq,open('.lastMatchSeq.pkl','wb'))
 
 if __name__ == '__main__':
