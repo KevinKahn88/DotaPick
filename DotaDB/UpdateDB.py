@@ -36,7 +36,7 @@ def main():
 	psql = DotaDB.connect_to_psql(user,pswd,host,database)
 
 	throttle = 5
-	while true:
+	while True:
 		time.sleep(throttle)
 		matchJSON = get_matches()
 		if matchJSON == -1:
@@ -44,7 +44,7 @@ def main():
 		else:
 			throttle = 5
 			matchDF = DotaDB.json_to_df(matchJSON)
-			matchDF.to_sql('dota_matches',psql,if_exists='replace',index=False,index_label='match_id')
+			matchDF.to_sql('dota_matches',psql,if_exists='append',index=False,index_label='match_id')
 			lastMatchSeq = matchDF['match_seq_num'][-1]
 			pickle.dump(lastMatchSeq,open('.lastMatchSeq.pkl','wb'))
 
