@@ -31,7 +31,7 @@ def main():
 	[_,pswd] = pickle.load(open('../.credentials.pkl','rb'))
 	user = 'kevin'
 	host = 'localhost'
-	database = 'kevin'
+	database = 'dota'
 	psql = DotaDB.connect_to_psql(user,pswd,host,database)
 
 	matchJSON = get_matches()
@@ -45,7 +45,7 @@ if __name__ == '__main__':
 [_,pswd] = pickle.load(open('../.credentials.pkl','rb'))
 user = 'kevin'
 host = 'localhost'
-database = 'kevin'
+database = 'dota'
 psql = DotaDB.connect_to_psql(user,pswd,host,database)
 
 matchJSON = get_matches()
