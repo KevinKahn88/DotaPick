@@ -3,6 +3,32 @@ import pickle
 import sqlalchemy
 import pandas as pd
 
+GAME_SCHEMA = [
+	'barracks_status_dire',
+	'barracks_status_radiant',
+	'cluster',
+	'dire_score',
+	'duration',
+	'engine',
+	'first_blood_time',
+	'flags',
+	'game_mode',
+	'human_players',
+	'leagueid',
+	'lobby_type',
+	'match_id',
+	'match_seq_num',
+	'negative_votes',
+	'positive_votes',
+	'pre_game_duration',
+	'radiant_score',
+	'radiant_win',
+	'start_time',
+	'tower_status_dire',
+	'tower_status_radiant',
+	'players'
+]
+
 PLAYER_SCHEMA = [
 	'account_id',
 	'player_slot',
@@ -80,6 +106,8 @@ Transforms match information stored as json into a pandas DF
 '''
 def json_to_df(matchesJson):
 	global PLAYER_SCHEMA
+	global GAME_SCHEMA
+
 	team_schema = []
 	for ind in range(10):
 		temp_schema = ['p' + str(ind) + '_' + item for item in PLAYER_SCHEMA]
@@ -89,12 +117,13 @@ def json_to_df(matchesJson):
 
 	matchDF = pd.DataFrame(matchesJson)
 	matchDF = matchDF[matchDF['human_players']==10]
+	for colName in matchDF.keys():
+		if colName not in GAME_SCHEMA:
+			del matchDF[colName]
+
 
 	newcols = matchDF['players'].apply(lambda x: pd.Series(parse_players_info(x), index = team_schema))
 	matchDF[team_schema] = newcols
-
-	# Removes dictionary columns (can't be transfered into SQL)
 	del matchDF['players']
-	if 'picks_bans' in matchDF.keys():
-		del matchDF['picks_bans']
+
 	return matchDF
