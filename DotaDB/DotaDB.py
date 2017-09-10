@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 
 import pickle
 import sqlalchemy
@@ -7,21 +8,15 @@ GAME_SCHEMA = [
 	'barracks_status_dire',
 	'barracks_status_radiant',
 	'cluster',
-	'dire_score',
 	'duration',
-	'engine',
 	'first_blood_time',
-	'flags',
 	'game_mode',
 	'human_players',
 	'leagueid',
 	'lobby_type',
 	'match_id',
 	'match_seq_num',
-	'negative_votes',
-	'positive_votes',
 	'pre_game_duration',
-	'radiant_score',
 	'radiant_win',
 	'start_time',
 	'tower_status_dire',
@@ -32,6 +27,7 @@ GAME_SCHEMA = [
 PLAYER_SCHEMA = [
 	'account_id',
 	'player_slot',
+	'hero_id',
 	'item_0',
 	'item_1',
 	'item_2',
@@ -52,11 +48,10 @@ PLAYER_SCHEMA = [
 	'hero_healing',
 	'level']
 
-ABILITY_SCHEMA = []
-for ind in range(19):	#19 is the highest ability level, valve ignores levels without upgrades
-	ABILITY_SCHEMA += ['ability' + str(ind) + '_id']
-	ABILITY_SCHEMA += ['ability' + str(ind) + '_time']
-	ABILITY_SCHEMA += ['ability' + str(ind) + '_level']
+ABILITY_SCHEMA = [
+	'ability_id',
+	'ability_time']
+	
 '''
 Establishes connection to psql database
 '''
@@ -79,7 +74,7 @@ def parse_players_info(players_list):
 		if 'ability_upgrades' in player.keys():
 			parsedCols += parse_ability(player['ability_upgrades'])
 		else:	#Entered if no abilities upgraded
-			parsedCols += [None]*3*19
+			parsedCols += [[],[]]
 	return parsedCols
 '''
 Converts json matches to dataframe that can export into psql
@@ -91,6 +86,9 @@ Output: dataframe
 Separate out array upgrades into distinct columns
 '''
 def parse_ability(ability_upgrades):
+	ability_id = [upgrade['ability'] for upgrade in ability_upgrades]
+	ability_time = [upgrade['time'] for upgrade in ability_upgrades]
+	'''
 	upgrade_num = len(ability_upgrades)
 	abilityCols = []
 	for ind in range(19):
@@ -100,6 +98,8 @@ def parse_ability(ability_upgrades):
 		else:
 			abilityCols += [None,None,None]
 	return abilityCols
+	'''
+	return [ability_id,ability_time]
 
 '''
 Transforms match information stored as json into a pandas DF
@@ -125,5 +125,15 @@ def json_to_df(matchesJson):
 	newcols = matchDF['players'].apply(lambda x: pd.Series(parse_players_info(x), index = team_schema))
 	matchDF[team_schema] = newcols
 	del matchDF['players']
+	del matchDF['human_players']
 
 	return matchDF
+'''
+#debugging
+matchJSON = pickle.load(open('matchData.pkl','rb'))
+df = json_to_df(matchJSON)
+[_,pswd] = pickle.load(open('../.credentials.pkl','rb'))
+psql = connect_to_psql('kevin',pswd,'localhost','kevin')
+keys = list(df.keys())
+df.to_sql('dota_matches',psql,index=False,if_exists='append')
+'''
