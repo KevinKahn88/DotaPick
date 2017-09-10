@@ -17,8 +17,8 @@ def get_matches():
 	if errCode == 0:
 		return matchJSON
 	else:
-		errorlog = open('Log\errlog.txt','a')
-		errMSG = time.strftime('%m-%d-%y-%H:%M:%S') + ',' + str(errCode) + ',' + errReason
+		errorlog = open('Log/errlog.txt','a')
+		errMSG = time.strftime('%m-%d-%y-%H:%M:%S') + ', ' + str(errCode) + ', ' + errReason + '\n'
 		errorlog.write(errMSG)
 		errorlog.close()
 		return -1
