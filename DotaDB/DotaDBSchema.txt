@@ -1,6 +1,6 @@
 Table: Matches
 
-p0_account_id				4e9			bigintint
+p0_account_id				4e9			bigint
 p0_player_slot				smallint
 p0_hero_id					smallint
 p0_item_0					smallint
