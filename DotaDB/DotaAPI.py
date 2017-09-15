@@ -34,7 +34,6 @@ def api_match_call(apiCall):
 	except IncompleteRead as err:
 		print(err)
 		return [None,'IncompleteRead','','']
-	except
 
 '''
 Form DotaAPI url from a dictionary of properties
