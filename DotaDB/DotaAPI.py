@@ -27,7 +27,7 @@ def api_match_call(apiCall):
 		rawData = apiResponse.read().decode('utf-8')
 		jsonData = json.loads(rawData)
 		matchData = jsonData['result']['matches']
-		return [matchData,0,None]
+		return [matchData,None,None,None]
 	except HTTPError as err:
 		print(err)
 		return [None,'HTTP',err.code,err.reason]
