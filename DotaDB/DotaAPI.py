@@ -5,6 +5,7 @@ DotaAPI controls calls to Valve's API
 
 from urllib.request import urlopen
 from urllib.error import HTTPError
+from http.client import IncompleteRead
 import json
 import pickle
 
@@ -16,7 +17,8 @@ Makes a call to the DotaAPI and returns the matchinfo in json format
 Input: url fr API call
 Output: 
 		matchData - json format, None if unsuccessful
-		error - 0 if successful
+		type - error type, None if successful
+		error - None if successful
 		errormsg - None if successful
 '''
 def api_match_call(apiCall):
@@ -28,7 +30,11 @@ def api_match_call(apiCall):
 		return [matchData,0,None]
 	except HTTPError as err:
 		print(err)
-		return [None,err.code,err.reason]
+		return [None,'HTTP',err.code,err.reason]
+	except IncompleteRead as err:
+		print(err)
+		return [None,'IncompleteRead','','']
+	except
 
 '''
 Form DotaAPI url from a dictionary of properties

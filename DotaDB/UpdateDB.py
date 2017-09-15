@@ -13,12 +13,12 @@ def get_matches():
 	lastMatchSeq = pickle.load(open('.lastMatchSeq.pkl','rb'))
 	prop = {'start_at_match_seq_num': str(lastMatchSeq+1),'matches_requested':'500'}
 	apiURL = DotaAPI.form_api_url(prop)
-	[matchJSON,errCode,errReason] = DotaAPI.api_match_call(apiURL)
+	[matchJSON,errType,errCode,errReason] = DotaAPI.api_match_call(apiURL)
 	if errCode == 0:
 		return matchJSON
 	else:
 		errorlog = open('Log/errlog.txt','a')
-		errMSG = time.strftime('%m-%d-%y-%H:%M:%S') + ', ' + str(errCode) + ', ' + errReason + '\n'
+		errMSG = time.strftime('%m-%d-%y-%H:%M:%S') + ', ' + errType + ', ' + str(errCode) + ', ' + errReason + '\n'
 		errorlog.write(errMSG)
 		errorlog.close()
 		return -1
