@@ -13,15 +13,15 @@ p0_leaver_status			smallint
 p0_gold 					smallint
 p0_last_hits				smallint
 p0_denies					smallint
-p0_gold_per_min				smallint
-p0_xp_per_min				smallint
-p0_gold_spent				smallint
-p0_hero_damage				smallint
-p0_tower_damage				smallint
-p0_hero_healing				smallint
+p0_gold_per_min				int
+p0_xp_per_min				int
+p0_gold_spent				int
+p0_hero_damage				int
+p0_tower_damage				int
+p0_hero_healing				int
 p0_level					smallint
-p0_ability0_id				smallint
-p0_ability0_time			smallint
+p0_ability_id				smallint[]
+p0_ability_time				smallint[]
 ...
 radiant_win								binary
 duration 					9178		smallint

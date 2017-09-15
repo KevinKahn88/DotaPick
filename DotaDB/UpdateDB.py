@@ -16,7 +16,7 @@ def get_matches():
 	[matchJSON,errType,errCode,errReason] = DotaAPI.api_match_call(apiURL)
 	if errType:
 		errorlog = open('Log/errlog.txt','a')
-		errMSG = time.strftime('%m-%d-%y-%H:%M:%S') + ', ' + errType + ', ' + str(errCode) + ', ' + errReason + '\n'
+		errMSG = time.strftime('%m-%d-%y-%H:%M:%S') + ', ' + str(errType) + ', ' + str(errCode) + ', ' + str(errReason) + '\n'
 		errorlog.write(errMSG)
 		errorlog.close()
 		return -1
