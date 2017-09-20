@@ -265,3 +265,13 @@ CREATE TABLE dota_matches (
 	p9_ability_id smallint[],
 	p9_ability_time smallint[]
 );
+
+CREATE TABLE clean_matches(
+	match_id bigint,
+	match_seq_num bigint,
+	start_time bigint,
+	radiant_win bool,
+	duration smallint,
+	rad_lineup smallint[],
+	dire_lineup smallint[]
+);
