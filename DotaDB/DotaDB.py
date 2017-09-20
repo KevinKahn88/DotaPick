@@ -128,6 +128,14 @@ def json_to_df(matchesJson):
 	del matchDF['human_players']
 
 	return matchDF
+
+def psql(host = 'localhost'):
+	[_,pswd] = pickle.load(open('../.credentials.pkl','rb'))
+	user = 'kevin'
+	database = 'dota'
+	psql = connect_to_psql(user,pswd,host,database)
+	return psql
+
 '''
 #debugging
 matchJSON = pickle.load(open('matchData.pkl','rb'))
