@@ -29,11 +29,7 @@ Continuously makes calls to dota API for match information
 uploads match data to DB
 '''
 def main():
-	[_,pswd] = pickle.load(open('../.credentials.pkl','rb'))
-	user = 'kevin'
-	host = 'localhost'
-	database = 'dota'
-	psql = DotaDB.connect_to_psql(user,pswd,host,database)
+	psql = DotaDB.psql()
 
 	throttle = 5
 	while True:
