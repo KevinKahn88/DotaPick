@@ -45,3 +45,6 @@ Dota2Cloud.pem
 Dota2.pem
 .credentials.pkl
 DotaDB/.lastMatchSeq.pkl
+Log/
+nohup.out
+__pycache__/
