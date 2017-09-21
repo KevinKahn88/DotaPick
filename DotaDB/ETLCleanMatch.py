@@ -27,6 +27,25 @@ def query_new_matches(psql):
 
 	return pd.read_sql_query(query,psql)
 
+def rad_lineup(row):
+	return [row['p0_hero_id'],
+			row['p1_hero_id'],
+			row['p2_hero_id'],
+			row['p3_hero_id'],
+			row['p4_hero_id']]
+
+def dire_lineup(row):
+	return [row['p5_hero_id'],
+			row['p6_hero_id'],
+			row['p7_hero_id'],
+			row['p8_hero_id'],
+			row['p9_hero_id']]
+
+def transform_match_df(match_df):
+	match_df['rad_lineup'] = match_df.apply(rad_lineup,axis=1)
+	match_df['dire_lineup'] = match_df.apply(dire_lineup,axis=1)
+	return match_df
+	
 def main():
 	pass
 
