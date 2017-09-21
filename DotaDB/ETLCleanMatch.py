@@ -44,10 +44,25 @@ def dire_lineup(row):
 def transform_match_df(match_df):
 	match_df['rad_lineup'] = match_df.apply(rad_lineup,axis=1)
 	match_df['dire_lineup'] = match_df.apply(dire_lineup,axis=1)
-	return match_df
 	
+	del match_df['p0_hero_id']
+	del match_df['p1_hero_id']
+	del match_df['p2_hero_id']
+	del match_df['p3_hero_id']
+	del match_df['p4_hero_id']
+	del match_df['p5_hero_id']
+	del match_df['p6_hero_id']
+	del match_df['p7_hero_id']
+	del match_df['p8_hero_id']
+	del match_df['p9_hero_id']
+
+	return match_df
+
 def main():
-	pass
+	psql = DotaDB.psql()
+	match_df = query_new_matches(psql)
+	clean_df = transform_match_df(match_df)
+	clean_df.to_sql('clean_matches',psql,index=False)
 
 if __name__ == '__main__':
 	main()
