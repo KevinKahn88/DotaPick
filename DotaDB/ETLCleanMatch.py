@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 import DotaDB
 import pandas as pd
 
@@ -22,7 +24,7 @@ def query_new_matches(psql):
 	LEFT JOIN clean_matches
 	ON dota_matches.match_id = clean_matches.match_id
 	WHERE clean_matches.match_id IS NULL
-	LIMIT 10
+	LIMIT 10000
 	'''
 
 	return pd.read_sql_query(query,psql)
@@ -44,7 +46,7 @@ def dire_lineup(row):
 def transform_match_df(match_df):
 	match_df['rad_lineup'] = match_df.apply(rad_lineup,axis=1)
 	match_df['dire_lineup'] = match_df.apply(dire_lineup,axis=1)
-	
+
 	del match_df['p0_hero_id']
 	del match_df['p1_hero_id']
 	del match_df['p2_hero_id']
@@ -61,8 +63,14 @@ def transform_match_df(match_df):
 def main():
 	psql = DotaDB.psql()
 	match_df = query_new_matches(psql)
-	clean_df = transform_match_df(match_df)
-	clean_df.to_sql('clean_matches',psql,index=False)
+
+	while len(match_df) > 0:
+
+		clean_df = transform_match_df(match_df)
+		clean_df.to_sql('clean_matches',psql,index=False,if_exists='append',index_label='match_id')
+		match_df = query_new_matches(psql)
+
+	print("ETL Complete")
 
 if __name__ == '__main__':
 	main()
