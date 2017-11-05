@@ -130,7 +130,7 @@ def json_to_df(matchesJson):
 	return matchDF
 
 def psql(host = 'localhost'):
-	[_,pswd] = pickle.load(open('../.credentials.pkl','rb'))
+	[_,pswd] = pickle.load(open('.credentials.pkl','rb'))
 	user = 'kevin'
 	database = 'dota'
 	psql = connect_to_psql(user,pswd,host,database)
